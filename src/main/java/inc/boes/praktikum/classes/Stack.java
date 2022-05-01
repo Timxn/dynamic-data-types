@@ -7,18 +7,35 @@ public interface Stack<T> implements AbstractStack {
         array = new ArrayList<T>();
     }
 
+
+    /*  add an object to stack by appending it to the ArrayList */
+    
     @Override
     public void push(T object) {
         array.add(object);
     } 
 
+
+    /*  remove last inserted element and return it    */
+    
     @Override
     public T pop() {
-        array.remove(array.getLength());
+        if (array.getLength() > 0) {
+            T temp = array.get(array.getLength());
+            array.remove(array.getLength());
+            return temp;
+        }
+        return null;
     }
 
+
+    /*  return last inserted element    */
+    
     @Override
     public T top() {
-        return array.get(array.getLength());
+        if (array.getLength() > 0) {
+            return array.get(array.getLength());
+        }
+        return null;
     }
 }
