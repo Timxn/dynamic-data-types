@@ -6,7 +6,7 @@ public interface AbstractSinglyLinkedList <T>{
 
     void removeLast();                      //removes last Node
     void removeatPointer(int pointer);      //removes Node at given pointer
-    void removeNode (T Node);               //removes first Node after given Node
+    void removeNode (T Node);               //removes first Node after containing given Node
     void removeNodes (T Node);              //remvoes all Nodes containing the Node
 
     T getNode(int pointer);                 //gives back Node, sets pointer to current Node
