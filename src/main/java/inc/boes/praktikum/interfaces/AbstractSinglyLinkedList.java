@@ -4,15 +4,15 @@ public interface AbstractSinglyLinkedList <T>{
     void add(T Node);                       //adds Node to the end of the list
     void insertafter(T Node,int pointer);   //adds Node after the pointer
 
-    void removeLast();
-    void removeatPointer(int pointer);
-    void removeNode (T Node);
-    void remodeNodes (T Node);
+    void removeLast();                      //removes last Node
+    void removeatPointer(int pointer);      //removes Node at given pointer
+    void removeNode (T Node);               //removes first Node after given Node
+    void removeNodes (T Node);              //remvoes all Nodes containing the Node
 
-    T getNode(int pointer);
-    int findPointerof(T Node);
-    int[] findPointersof(T Node);
+    T getNode(int pointer);                 //gives back Node, sets pointer to current Node
+    int findPointerof(T Node);              //returns first Node containing the Node
+    int[] findPointersof(T Node);           //returns all Nodes containing the Node
 
-    String toString();
+    String toString();                      //format i: getObject(i)\n
 
 }
