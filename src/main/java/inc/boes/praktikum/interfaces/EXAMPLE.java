@@ -1,4 +1,4 @@
-package inc.boes.praktikum.interfaces;
+package inc.boes.praktikum.*;
 
 public interface EXAMPLE {
 }
