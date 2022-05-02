@@ -1,4 +1,4 @@
-package inc.boes.praktikum.*;
+package inc.boes.praktikum.interfaces;
 
 public interface AbstractBinarySearchTree<T extends Comparable> {
     public void insertion(T data);

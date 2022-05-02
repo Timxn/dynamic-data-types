@@ -1,4 +1,4 @@
-package inc.boes.praktikum.*;
+package inc.boes.praktikum.classes;
 
 public class Main {
     public static void main(String[] args) {
