@@ -29,6 +29,7 @@ public class Stack<T> implements AbstractStack<T> {
      * add data to Stack
      * @param content expects generic data to be stored in new root node (on top of stack)
      */
+    @Override
     public void push(T content) {
         Stack_Node newNode = new Stack_Node(content);
         newNode.setNext(root);
@@ -41,7 +42,7 @@ public class Stack<T> implements AbstractStack<T> {
      * remove last inserted element and return it
      * @return null if stack is empty, else generic data type stored in the root node
      */
-
+    @Override
     public T pop() {
         if (root != null) {
             T temp = (T) root.getContent();
@@ -62,6 +63,7 @@ public class Stack<T> implements AbstractStack<T> {
      * return last inserted element
      * @return null if stack is empty, else generic data type stored in the root node
      */
+    @Override
     public T top() {
         if (root != null) {
             return (T) root.getContent();
