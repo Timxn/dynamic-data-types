@@ -21,10 +21,6 @@ public class DoublyLinkedListNode<T> {
         return data;
     }
 
-    public void setData(T data) {
-        this.data = data;
-    }
-
     public DoublyLinkedListNode getPrevious() {
         return previous;
     }

@@ -1,20 +1,17 @@
 package inc.boes.praktikum.interfaces;
 
-public interface AbstractDoublyLinkedList <T>{
+public interface AbstractDoublyLinkedList <T extends Comparable>{
     void add(T Node);
-    void insertafter (T Node, int pointernext, int pointerprevious);
-    void insertatfront (T Node, int pointerprevious);
-    void insertbefore (T Node, int pointerprevious);
+    void insertAfter (T Node, int index);
 
-    void removeLast();  //Last Node deleted
-    void removeNode (int pointerprevious, int pointernext);
-    void removeatPointer(int pointernext);      //removes Node at given pointer
-    void removeNode (T Node);               //removes first Node after containing given Node
-    void removeNodes (T Node);              //remvoes all Nodes containing the Node
+    void removeLast();                      //Last Node deleted
+    void removeNode (int index);             //removes Node at given pointer
+    void removeValue (T Node);               //removes first Node after containing given Node
+    void removeAllOfThisValues (T Node);              //remvoes all Nodes containing the Node
 
-    T getNode(int pointernext);             //gives back Node, sets pointer to current Node
-    int findPointerof(T Node);              //returns first Node containing the Node
-    int[] findPointersof(T Node);           //returns all Nodes containing the Node
+    T getValue(int pointernext);             //gives back Node, sets pointer to current Node
+    int getPositionOfValue(T Node);              //returns first Node containing the Node
+    int[] getAllPositionsOfValue(T Node);           //returns all Nodes containing the Node
 
 
 
