@@ -13,10 +13,6 @@ public class Stack_Node<T> {
         return content;
     }
 
-    public void setContent(T content) {
-        this.content = content;
-    }
-
     public Stack_Node<T> getNext() {
         return next;
     }

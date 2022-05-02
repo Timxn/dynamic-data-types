@@ -6,23 +6,29 @@ public class Stack<T> implements AbstractStack<T> {
     private int size;
     private Stack_Node root;
 
-    /*  Build a Stack with one Element with the sepcified content   */
-
+    /**
+     * Build a Stack with one Element with the sepcified content
+     * @param content expects generic data to be stored in root (first and only node) of a new stack
+     *
+     */
     public Stack(T content) {
         this.size = 1;
         this.root = new Stack_Node<>(content);
     }
 
-    /*  Build empty Stack   */
-
+    /**
+     * Build empty Stack
+    */
     public Stack() {
         this.size = 0;
         this.root = null;
     }
 
 
-    /*  add new content to stack    */
-
+    /**
+     * add data to Stack
+     * @param content expects generic data to be stored in new root node (on top of stack)
+     */
     public void push(T content) {
         Stack_Node newNode = new Stack_Node(content);
         newNode.setNext(root);
@@ -31,8 +37,10 @@ public class Stack<T> implements AbstractStack<T> {
     } 
 
 
-    /*  remove last inserted element and return it    */
-    /*  if stack is empty return null  */
+    /**
+     * remove last inserted element and return it
+     * @return null if stack is empty, else generic data type stored in the root node
+     */
 
     public T pop() {
         if (root != null) {
@@ -50,9 +58,10 @@ public class Stack<T> implements AbstractStack<T> {
     }
 
 
-    /*  return last inserted element    */
-    /*  if stack is empty return null  */
-
+    /**
+     * return last inserted element
+     * @return null if stack is empty, else generic data type stored in the root node
+     */
     public T top() {
         if (root != null) {
             return (T) root.getContent();
@@ -61,7 +70,10 @@ public class Stack<T> implements AbstractStack<T> {
         }
     }
 
-    /*  possible optimisation with StringBuilder if needed  */
+    /**
+     * toString() function for representation of Stack
+     * @return ['numberOfElement'] contains 'content' | ... | ['numberOfElement'] contains 'content'
+     */
 
     @Override
     public String toString() {
