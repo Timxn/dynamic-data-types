@@ -1,11 +1,11 @@
 package inc.boes.praktikum.interfaces;
 
 public interface AbstractBinarySearchTree<T extends Comparable> {
-    public void insert(T data);
-    public void delete(T data);
-    public boolean search(T data);
+    void insert(T data);
+    void delete(T data);
+    boolean search(T data);
 
-    public boolean isEmpty();
+    boolean isEmpty();
 
-    public String toString(String Traversal);
+    String toString(String Traversal);
 }
