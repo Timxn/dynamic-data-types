@@ -1,4 +1,4 @@
-package inc.boes.praktikum.classes;
+package inc.boes.praktikum.classes.stack;
 
 public class StackMain {
     private static Stack<Integer> example_stack = new Stack<>();

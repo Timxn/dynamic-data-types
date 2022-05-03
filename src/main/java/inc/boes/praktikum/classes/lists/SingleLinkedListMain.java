@@ -1,4 +1,4 @@
-package inc.boes.praktikum.classes;
+package inc.boes.praktikum.classes.lists;
 
 public class SingleLinkedListMain {
     static SingleLinkedList<Integer> linkedList;
