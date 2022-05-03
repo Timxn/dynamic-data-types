@@ -4,7 +4,7 @@ import inc.boes.praktikum.interfaces.AbstractBinarySearchTree;
 
 public class BinarySearchTree<T extends Number> implements AbstractBinarySearchTree {
     public static void BinarySearchTree(String[] args) {
-        System.out.println("Hello World");
+        
     }
 
     @Override
