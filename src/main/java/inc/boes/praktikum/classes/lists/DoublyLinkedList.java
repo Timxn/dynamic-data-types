@@ -1,4 +1,4 @@
-package inc.boes.praktikum.classes;
+package inc.boes.praktikum.classes.lists;
 
 import inc.boes.praktikum.interfaces.AbstractDoublyLinkedList;
 

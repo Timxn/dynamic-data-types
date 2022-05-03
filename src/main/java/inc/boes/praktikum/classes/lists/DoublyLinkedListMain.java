@@ -1,4 +1,4 @@
-package inc.boes.praktikum.classes;
+package inc.boes.praktikum.classes.lists;
 
 public class DoublyLinkedListMain {
     private static DoublyLinkedList<Integer> doubleLinkedList;

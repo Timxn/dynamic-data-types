@@ -1,4 +1,4 @@
-package inc.boes.praktikum.classes;
+package inc.boes.praktikum.classes.stack;
 
 import inc.boes.praktikum.interfaces.AbstractStack;
 
