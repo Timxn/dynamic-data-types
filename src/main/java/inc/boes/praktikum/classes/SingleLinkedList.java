@@ -9,6 +9,10 @@ public class SingleLinkedList<T extends Comparable> implements AbstractSinglyLin
         this.root = new SingleLinkedListNode<>(data);
     }
 
+    /**
+     * This function adds the data given at the end of the list.
+     * @param pData what data to add
+     */
     @Override
     public void add(T pData) {
         SingleLinkedListNode current = root;
@@ -18,6 +22,11 @@ public class SingleLinkedList<T extends Comparable> implements AbstractSinglyLin
         current.setNext(new SingleLinkedListNode(pData));
     }
 
+    /**
+     * This function places the data given after the given location inside the list. It does so by creating a new node and pushing existing nodes one to the back.
+     * @param Node what data to be inserted
+     * @param index where to insert it (if it shall be placed at the second place ([0,1,2,...] so index 1) in this case)
+     */
     @Override
     public void insertafter(T Node, int index) {
         SingleLinkedListNode current = root;
@@ -32,6 +41,9 @@ public class SingleLinkedList<T extends Comparable> implements AbstractSinglyLin
         current.setNext(toBeAdded);
     }
 
+    /**
+     * This function removes the last Node from the list.
+     */
     @Override
     public void removeLast() {
         SingleLinkedListNode current = root;
@@ -41,6 +53,10 @@ public class SingleLinkedList<T extends Comparable> implements AbstractSinglyLin
         current.setNext(null);
     }
 
+    /**
+     * This function removes a Node from the given index location
+     * @param pointer index specifies the location inside the list
+     */
     @Override
     public void removeatPointer(int pointer) {
         SingleLinkedListNode current = root;
@@ -55,6 +71,10 @@ public class SingleLinkedList<T extends Comparable> implements AbstractSinglyLin
         }
     }
 
+    /**
+     * This function removes the first node containing the given Data
+     * @param Node pData contains the generic Datatype whose first occurrence shall be removed
+     */
     @Override
     public void removeNode(T Node) {
         SingleLinkedListNode current = root;
@@ -68,6 +88,10 @@ public class SingleLinkedList<T extends Comparable> implements AbstractSinglyLin
         }
     }
 
+    /**
+     * This function removes all occurrences of the given Data
+     * @param Node pData contains the generic Datatype whose occurrences shall be removed
+     */
     @Override
     public void removeNodes(T Node) {
         while (root.findPointerof(Node)) {
@@ -75,6 +99,11 @@ public class SingleLinkedList<T extends Comparable> implements AbstractSinglyLin
         }
     }
 
+    /**
+     * This function provides us with a tool to retrieve the data from a given position in this List
+     * @param pointer index ist the position whose data is of interest
+     * @return This function returns a generic datatype extending comparable
+     */
     @Override
     public T getNode(int pointer) {
         SingleLinkedListNode current = root;
@@ -85,6 +114,11 @@ public class SingleLinkedList<T extends Comparable> implements AbstractSinglyLin
         return current.getData();
     }
 
+    /**
+     * This function provides us with the ability to find the first occurrence of the specified data
+     * @param Node provides the data whose index we want
+     * @return returns >= 0 if found or -1 if no Node with provided Data is found
+     */
     @Override
     public int findPointerof(T Node) {
         SingleLinkedListNode current = root;
@@ -99,6 +133,11 @@ public class SingleLinkedList<T extends Comparable> implements AbstractSinglyLin
         return -1;
     }
 
+    /**
+     * This function provides us with a list (array) of all indexes at which a specific entry is located
+     * @param Node provides the data whose indexes we want
+     * @return returns an int[] with all positions of all occurences
+     */
     @Override
     public int[] findPointersof(T Node) {
         SingleLinkedListNode current = root;
@@ -121,6 +160,13 @@ public class SingleLinkedList<T extends Comparable> implements AbstractSinglyLin
         return resultsOut;
     }
 
+    /**
+     *
+     * !!! Unoptimized, if used with larger Lists use Stringbuilder !!!
+     *
+     * This function provides us with the ability to visually represent our list
+     * @return returns a string
+     */
     @Override
     public String toString() {
         SingleLinkedListNode current = root;
