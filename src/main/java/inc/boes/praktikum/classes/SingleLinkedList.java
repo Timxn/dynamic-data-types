@@ -77,23 +77,48 @@ public class SingleLinkedList<T extends Comparable> implements AbstractSinglyLin
 
     @Override
     public T getNode(int pointer) {
-        return null;
+        SingleLinkedListNode current = root;
+        while (index != 0) {
+            current = current.getNext();
+            index--;
+        }
+        return current.getData();
     }
 
     @Override
     public int findPointerof(T Node) {
         SingleLinkedListNode current = root;
-        int index = 0;
-        while (!(current.getData().equal(Node))) {
+        int position = 0;
+        while (current.getNext() != null) {
+            if (current.getData() == pData) {
+                return position;
+            }
             current = current.getNext();
-            index++;
+            position++;
         }
-        return index;
+        return -1;
     }
 
     @Override
     public int[] findPointersof(T Node) {
-        return new int[0];
+        SingleLinkedListNode current = root;
+        ArrayList<Integer> results = new ArrayList<>();
+        int position = 0;
+        while (current.getNext() != null) {
+            if (current.getData().equals(pData)) {
+                results.add(position);
+            }
+            current = current.getNext();
+            position++;
+        }
+        if (current.getData().equals(pData)) {
+            results.add(position);
+        }
+        int[] resultsOut = new int[results.size()];
+        for (int i = 0; i < results.size(); i++) {
+            resultsOut[i] = results.get(i);
+        }
+        return resultsOut;
     }
 
     @Override
