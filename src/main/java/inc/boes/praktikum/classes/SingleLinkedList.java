@@ -34,22 +34,45 @@ public class SingleLinkedList<T extends Comparable> implements AbstractSinglyLin
 
     @Override
     public void removeLast() {
-
+        SingleLinkedListNode current = root;
+        while (current.getNext().getNext() != null) {
+            current = current.getNext();
+        }
+        current.setNext(null);
     }
 
     @Override
     public void removeatPointer(int pointer) {
-
+        SingleLinkedListNode current = root;
+        while (index > 1) {
+            current = current.getNext();
+            index--;
+        }
+        if (current.getNext() != null) {
+            current.setNext(current.getNext.getNext);
+        } else {
+            current.setNext(null);
+        }
     }
 
     @Override
     public void removeNode(T Node) {
-
+        SingleLinkedListNode current = root;
+        while (!current.getNext().getData().equal(Node)) {
+            current = current.getNext();
+        }
+        if (current.getNext() != null) {
+            current.setNext(current.getNext.getNext);
+        } else {
+            current.setNext(null);
+        }
     }
 
     @Override
     public void removeNodes(T Node) {
-
+        while (root.findPointerof(Node)) {
+            root.removeatPointer(root.findPointerof(Node));
+        }
     }
 
     @Override
@@ -59,7 +82,13 @@ public class SingleLinkedList<T extends Comparable> implements AbstractSinglyLin
 
     @Override
     public int findPointerof(T Node) {
-        return 0;
+        SingleLinkedListNode current = root;
+        int index = 0;
+        while (!(current.getData().equal(Node))) {
+            current = current.getNext();
+            index++;
+        }
+        return index;
     }
 
     @Override
