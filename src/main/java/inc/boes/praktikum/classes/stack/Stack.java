@@ -16,15 +16,6 @@ public class Stack<T> implements AbstractStack<T> {
         this.root = new Stack_Node<>(content);
     }
 
-    /**
-     * Build an empty Stack
-     * @param content expects generic data to be stored in root (first and only node) of a new stack
-     *
-     */
-    public Stack() {
-        this.size = 0;
-        this.root = null;
-    }
 
     /**
      * Build empty Stack
