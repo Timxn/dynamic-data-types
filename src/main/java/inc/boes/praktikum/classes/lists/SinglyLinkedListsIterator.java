@@ -32,4 +32,9 @@ public class SinglyLinkedListsIterator <T> implements Iterator <T> {
         throw new nosuchElementException();
     }
 
+    @Override
+    public void remove (){
+        throw new UnsupportedOperationException();
+    }
+
 }
