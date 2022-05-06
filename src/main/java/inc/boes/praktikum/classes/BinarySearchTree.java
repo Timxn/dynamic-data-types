@@ -1,23 +1,25 @@
 package inc.boes.praktikum.classes;
 import inc.boes.praktikum.interfaces.AbstractBinarySearchTree;
 
-public class BinarySearchTree implements AbstractBinarySearchTree {
-    public BinarySearchTree(String[] args) {
-        
+public class BinarySearchTree<T extends Number> implements AbstractBinarySearchTree<T>{
+
+    private TreeNode<T> root;
+    public BinarySearchTree() {
+        this.root = null;
     }
 
     @Override
-    public void insert(Number data) {
+    public void insert(T data) {
 
     }
 
     @Override
-    public void delete(Number data) {
+    public void delete(T data) {
 
     }
 
     @Override
-    public boolean search(Number data) {
+    public boolean search(T data) {
         return false;
     }
 
