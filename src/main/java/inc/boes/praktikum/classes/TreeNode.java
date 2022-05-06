@@ -7,6 +7,8 @@ public class TreeNode<T extends Number> {
 
     public TreeNode(T pRoot){
         this.root = pRoot;
+        this.leftChild = null;
+        this.rightChild = null;
     }
 
     public T getRoot(){
