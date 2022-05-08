@@ -13,7 +13,7 @@ public class BinarySearchTree<T extends Number> implements AbstractBinarySearchT
         root = insertion(root, value);
     }
 
-    private TreeNode<T> insertion(TreeNode<T> current,T value) {
+    private TreeNode<T> insertion(TreeNode<T> current, T value) {
         if(current == null) {
             return new TreeNode<>(value);
         } else if(value.doubleValue() < current.getValue().doubleValue()){
@@ -31,7 +31,19 @@ public class BinarySearchTree<T extends Number> implements AbstractBinarySearchT
 
     @Override
     public boolean search(T value) {
-        return false;
+        return searching(root, value);
+    }
+
+    private boolean searching(TreeNode<T> current, T value){
+        if(current == null) {
+            return false;
+        }
+        if(value.doubleValue() == current.getValue().doubleValue()) {
+            return true;
+        }
+        return value.doubleValue() < current.getValue().doubleValue()
+                ? searching(current.getLeftChild(), value)
+                : searching(current.getRightChild(), value);
     }
 
     @Override
