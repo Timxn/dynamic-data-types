@@ -73,6 +73,45 @@ public class Stack<T> implements AbstractStack<T> {
         }
     }
 
+
+    /**
+     *
+     * @return true if the stack has a next value
+     */
+    @Override
+    public boolean hasNext() {
+        if (root.getNext().equals(null)) {
+            return false;
+        }
+        return true;
+    }
+
+
+    /**
+     *
+     * @return returns next stack-node in line, if Stack hasNext=true it returns null
+     */
+    @Override
+    public Stack_Node next() {
+        return root.getNext();
+    }
+
+
+    /**
+     * removes element (pop without return)
+     */
+    @Override
+    public void remove() {
+        if (root != null) {
+            if (size > 1) {
+                root = root.getNext();
+            } else {
+                root = null;
+            }
+            size--;
+        }
+    }
+
     /**
      * toString() function for representation of Stack
      * @return ['numberOfElement'] contains 'content' | ... | ['numberOfElement'] contains 'content'
