@@ -1,6 +1,7 @@
 package inc.boes.praktikum.classes;
 import inc.boes.praktikum.interfaces.AbstractBinarySearchTree;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 public class BinarySearchTree<T extends Number> implements AbstractBinarySearchTree<T>{
 
@@ -14,7 +15,7 @@ public class BinarySearchTree<T extends Number> implements AbstractBinarySearchT
         root = insertion(root, value);
     }
 
-    private TreeNode<T> insertion(TreeNode<T> current, T value) {
+    private @NotNull TreeNode<T> insertion(TreeNode<T> current, T value) {
         if(isEmpty(current)) {
             return new TreeNode<>(value);
         } else if(value.doubleValue() < current.getValue().doubleValue()){
@@ -30,7 +31,7 @@ public class BinarySearchTree<T extends Number> implements AbstractBinarySearchT
         root = deletion(root, value);
     }
 
-    private TreeNode<T> deletion (TreeNode<T> current, T value) {
+    private @Nullable TreeNode<T> deletion (TreeNode<T> current, T value) {
         if (isEmpty(current)){
             return null;
         }
@@ -55,7 +56,7 @@ public class BinarySearchTree<T extends Number> implements AbstractBinarySearchT
         return current;
     }
 
-    private T findSmallestValue (TreeNode<T> root) {
+    private T findSmallestValue (@NotNull TreeNode<T> root) {
         return isEmpty(root.getLeftChild()) ? root.getValue() : findSmallestValue(root.getLeftChild());
     }
 
