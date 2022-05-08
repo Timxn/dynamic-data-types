@@ -47,8 +47,8 @@ public class BinarySearchTree<T extends Number> implements AbstractBinarySearchT
     }
 
     @Override
-    public boolean isEmpty(TreeNode<T> pNode) {
-        return pNode == null;
+    public boolean isEmpty(TreeNode<T> value) {
+        return value == null;
     }
 
     @Override
