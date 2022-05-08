@@ -11,7 +11,8 @@ public interface AbstractBinarySearchTree<T extends Number> {
     enum Traversal{
         PreOrder,
         InOrder,
-        PostOrder
+        PostOrder,
+        LevelOrder
     }
 
 

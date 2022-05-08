@@ -86,13 +86,7 @@ public class BinarySearchTree<T extends Number> implements AbstractBinarySearchT
     }
 
     public void toStrings(TreeNode<T> pNode){
-        if(!isEmpty(pNode.getLeftChild())) {
-            toStrings(pNode.getLeftChild());
-        } else if(!isEmpty(pNode)) {
-            System.out.println(pNode.getValue().doubleValue());
-        } else if(!isEmpty(pNode.getRightChild())){
-            toStrings(pNode.getRightChild());
-        }
+
     }
 
     /*public static void main(String[] args) {
