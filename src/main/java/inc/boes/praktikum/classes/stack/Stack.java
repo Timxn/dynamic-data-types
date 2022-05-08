@@ -2,9 +2,11 @@ package inc.boes.praktikum.classes.stack;
 
 import inc.boes.praktikum.interfaces.AbstractStack;
 
+import java.util.EmptyStackException;
+
 public class Stack<T> implements AbstractStack<T> {
     private int size;
-    private Stack_Node root;
+    private Stack_Node<T> root;
 
     /**
      * Build a Stack with one Element with the sepcified content
@@ -19,7 +21,7 @@ public class Stack<T> implements AbstractStack<T> {
 
     /**
      * Build empty Stack
-    */
+     */
     public Stack() {
         this.size = 0;
         this.root = null;
@@ -36,7 +38,7 @@ public class Stack<T> implements AbstractStack<T> {
         newNode.setNext(root);
         root = newNode;
         size++;
-    } 
+    }
 
 
     /**
@@ -46,7 +48,7 @@ public class Stack<T> implements AbstractStack<T> {
     @Override
     public T pop() {
         if (root != null) {
-            T temp = (T) root.getContent();
+            T temp = root.getContent();
             if (size > 1) {
                 root = root.getNext();
             } else {
@@ -80,7 +82,10 @@ public class Stack<T> implements AbstractStack<T> {
      */
     @Override
     public boolean hasNext() {
-        if (root.getNext().equals(null)) {
+        if (root == null) {
+            throw new EmptyStackException();
+        }
+        if (root.getNext() == null) {
             return false;
         }
         return true;
@@ -88,27 +93,34 @@ public class Stack<T> implements AbstractStack<T> {
 
 
     /**
-     *
-     * @return returns next stack-node in line, if Stack hasNext=true it returns null
+     * removes first element of stack and sets the second element as the root
+     * @return returns current values
      */
     @Override
-    public Stack_Node next() {
-        return root.getNext();
+    public T next() {
+        if (root == null) {
+            throw new EmptyStackException();
+        } else {
+            root = root.getNext();
+            size--;
+            if (root == null) {
+                return null;
+            } else {
+                return root.getContent();
+            }
+        }
     }
 
 
     /**
-     * removes element (pop without return)
+     * removes element
      */
     @Override
     public void remove() {
-        if (root != null) {
-            if (size > 1) {
-                root = root.getNext();
-            } else {
-                root = null;
-            }
-            size--;
+        if (root == null) {
+            throw new EmptyStackException();
+        } else {
+            this.next();
         }
     }
 
