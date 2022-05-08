@@ -7,5 +7,12 @@ public interface AbstractBinarySearchTree<T extends Number> {
     void delete(T value);
     boolean search(T value);
     boolean isEmpty(TreeNode<T> pNode);
-    String toString(String traversal);
+    String toString(Traversal traversal);
+    enum Traversal{
+        PreOrder,
+        InOrder,
+        PostOrder
+    }
+
+
 }
