@@ -10,19 +10,18 @@ public class BinarySearchTree<T extends Number> implements AbstractBinarySearchT
 
     @Override
     public void insert(T value) {
-        root = insertion(root);
+        root = insertion(root, value);
     }
 
-    private TreeNode<T> insertion(TreeNode<T> pNode) {
-        if (isEmpty(pNode)) {
-            return pNode;
-        } else if(pNode.getValue().doubleValue() >= pNode.getValue().doubleValue()) {
-            pNode.setLeftChild(insertion(pNode.getLeftChild()));
-            return pNode.getLeftChild();
-        } else {
-            pNode.setRightChild(insertion(pNode.getRightChild()));
-            return pNode.getRightChild();
+    private TreeNode<T> insertion(TreeNode<T> current,T value) {
+        if(current == null) {
+            return new TreeNode<>(value);
+        } else if(value.doubleValue() < current.getValue().doubleValue()){
+            current.setLeftChild(insertion(current.getLeftChild(), value));
+        } else if(value.doubleValue() > current.getValue().doubleValue()){
+            current.setRightChild(insertion(current.getRightChild(), value));
         }
+        return current; //if element exists already nothing happens and the existing tree will be returned
     }
 
     @Override
@@ -41,7 +40,7 @@ public class BinarySearchTree<T extends Number> implements AbstractBinarySearchT
     }
 
     @Override
-    public String toString(String traversal) {
+    public String toString(Traversal traversal) {
         return null;
     }
 
