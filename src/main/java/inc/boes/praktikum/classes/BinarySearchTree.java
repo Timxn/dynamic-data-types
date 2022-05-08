@@ -26,7 +26,36 @@ public class BinarySearchTree<T extends Number> implements AbstractBinarySearchT
 
     @Override
     public void delete(T value) {
+        root = deletion(root, value);
+    }
 
+    private TreeNode<T> deletion (TreeNode<T> current, T value) {
+        if (current == null){
+            return null;
+        }
+        if (value.doubleValue() == current.getValue().doubleValue()) {
+            if (current.getLeftChild() == null && current.getRightChild() == null) {
+                return null;
+            } else if (current.getRightChild() == null) {
+                return current.getRightChild();
+            } else if (current.getLeftChild() == null) {
+                return current.getLeftChild();
+            } else {
+                T smallestValue = findSmallestValue(current.getRightChild());
+                current.setValue(smallestValue);
+                current.setRightChild(deletion(current.getRightChild(), smallestValue));
+                return current;
+            }
+        }
+        if (value.doubleValue() < current.getValue().doubleValue()) {
+            current.setLeftChild(deletion(current.getLeftChild(), value));
+        }
+        current.setRightChild(deletion(current.getRightChild(), value));
+        return current;
+    }
+
+    private T findSmallestValue (TreeNode<T> root) {
+        return root.getLeftChild() == null ? root.getValue() : findSmallestValue(root.getLeftChild());
     }
 
     @Override
