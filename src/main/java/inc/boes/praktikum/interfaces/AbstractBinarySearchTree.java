@@ -13,7 +13,5 @@ public interface AbstractBinarySearchTree<T extends Number> {
         InOrder,
         PostOrder
     }
-    boolean hasNext(TreeNode<T> node);
-    TreeNode<T> next();
 
 }
