@@ -8,6 +8,6 @@ public interface AbstractStack<T> {
     public T top();
 
     public boolean hasNext();
-    public Stack_Node next();
+    public T next();
     public void remove();   // UnsopportedOperationException and IllegalStateException could be thrown
 }
