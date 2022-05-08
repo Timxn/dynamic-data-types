@@ -1,5 +1,6 @@
 package inc.boes.praktikum.classes;
 import inc.boes.praktikum.interfaces.AbstractBinarySearchTree;
+import org.jetbrains.annotations.NotNull;
 
 public class BinarySearchTree<T extends Number> implements AbstractBinarySearchTree<T>{
 
@@ -81,20 +82,45 @@ public class BinarySearchTree<T extends Number> implements AbstractBinarySearchT
     }
 
     @Override
-    public String toString(Traversal traversal) {
-        return null;
+    public String toString(@NotNull Traversal traversal) {
+        switch (traversal) {
+            case InOrder -> {
+                return traverseInOrder(root, "");
+            }
+            case PreOrder -> {
+                return traversePreOrder(root, "");
+            }
+            case PostOrder -> {
+                return traversePostOrder(root, "");
+            }
+        }
+        return null; //if wrong traversal
     }
 
-    public void toStrings(TreeNode<T> pNode){
-
+    private String traverseInOrder(TreeNode<T> node, String out) {
+        if (node != null) {
+            out = traverseInOrder(node.getLeftChild(), out);
+            out = out + " " + node.getValue().doubleValue();
+            out = traverseInOrder(node.getRightChild(), out);
+        }
+        return out;
     }
 
-    /*public static void main(String[] args) {
-        BinarySearchTree<Integer> bst = new BinarySearchTree<>();
-        bst.insert(2);
-        bst.insert(3);
-        bst.insert(4);
-        bst.insert(1);
-        bst.toStrings(root);
-    }*/
+    private String traversePreOrder(TreeNode<T> node, String out) {
+        if (node != null) {
+            out = out + " " + node.getValue().doubleValue();
+            out = traversePreOrder(node.getLeftChild(), out);
+            out = traversePreOrder(node.getRightChild(), out);
+        }
+        return out;
+    }
+
+    private String traversePostOrder(TreeNode<T> node, String out) {
+        if (node != null) {
+            out = traversePostOrder(node.getLeftChild(), out);
+            out = traversePostOrder(node.getRightChild(), out);
+            out = out + " " + node.getValue().doubleValue();
+        }
+        return out;
+    }
 }
