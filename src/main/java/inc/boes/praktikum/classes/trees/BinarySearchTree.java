@@ -164,7 +164,7 @@ public class BinarySearchTree<T extends Number> implements AbstractBinarySearchT
 
         @Override
         public boolean hasNext() {
-            return copy.root != null;
+            return !copy.isEmpty();
         }
 
         @Override
