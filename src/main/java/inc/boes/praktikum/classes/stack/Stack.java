@@ -46,6 +46,7 @@ public class Stack<T> implements AbstractStack<T>, Iterable<T> {
     /**
      * remove last inserted element and return it
      * @return null if stack is empty, else generic data type stored in the root node
+     * @throws EmptyStackException when stack is empty
      */
     @Override
     public T pop() {
@@ -66,14 +67,15 @@ public class Stack<T> implements AbstractStack<T>, Iterable<T> {
 
     /**
      * return last inserted element
-     * @return null if stack is empty, else generic data type stored in the root node
+     * @return else generic data type stored in the root node
+     * @throws EmptyStackException when stack is empty
      */
     @Override
     public T top() {
         if (root != null) {
             return (T) root.getContent();
         } else {
-            return null;
+            throw new EmptyStackException();
         }
     }
 
@@ -211,6 +213,7 @@ public class Stack<T> implements AbstractStack<T>, Iterable<T> {
             if (hasMovedSinceLastDelete) {
                 root.deleteAtPosition(position);
                 hasMovedSinceLastDelete = false;
+                position--;
             } else {
                 throw new IllegalStateException();
             }

@@ -101,7 +101,8 @@ class StackTest {
     void remove() {
         Stack<Integer> integerStack = new Stack<>();
         integerStack.push(42);
-        integerStack.iterator().remove();
+        Iterator<Integer> iterator = integerStack.iterator();
+        iterator.remove();
         assertTrue(integerStack.isEmpty());
     }
 
