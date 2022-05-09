@@ -13,6 +13,10 @@ public class BinarySearchTree<T extends Number> implements AbstractBinarySearchT
         this.root = null;
     }
 
+    public TreeNode<T> getRoot() {
+        return root;
+    }
+
     @Override
     public void insert(T value) {
         if (value == null) {
@@ -28,7 +32,7 @@ public class BinarySearchTree<T extends Number> implements AbstractBinarySearchT
      * @return
      */
     private @NotNull TreeNode<T> insertion(TreeNode<T> current, T value) {
-        if(isEmpty(current)) {
+        if(existsNode(current)) {
             return new TreeNode<>(value);
         } else if(value.doubleValue() < current.getValue().doubleValue()){
             current.setLeftChild(insertion(current.getLeftChild(), value));
@@ -47,16 +51,16 @@ public class BinarySearchTree<T extends Number> implements AbstractBinarySearchT
     }
 
     private @Nullable TreeNode<T> deletion (TreeNode<T> current, T value) {
-        if (isEmpty(current)){
+        if (existsNode(current)){
             return null;
         }
         if (value.doubleValue() == current.getValue().doubleValue()) {
-            if (isEmpty(current.getLeftChild()) && isEmpty(current.getRightChild())) {
+            if (existsNode(current.getLeftChild()) && existsNode(current.getRightChild())) {
                 return null;
-            } else if (isEmpty(current.getRightChild())) {
-                return current.getRightChild();
-            } else if (isEmpty(current.getLeftChild())) {
+            } else if (existsNode(current.getRightChild() )) {
                 return current.getLeftChild();
+            } else if (existsNode(current.getLeftChild())) {
+                return current.getRightChild();
             } else {
                 T smallestValue = findSmallestValue(current.getRightChild());
                 current.setValue(smallestValue);
@@ -72,7 +76,7 @@ public class BinarySearchTree<T extends Number> implements AbstractBinarySearchT
     }
 
     private T findSmallestValue (@NotNull TreeNode<T> root) {
-        return isEmpty(root.getLeftChild()) ? root.getValue() : findSmallestValue(root.getLeftChild());
+        return existsNode(root.getLeftChild()) ? root.getValue() : findSmallestValue(root.getLeftChild());
     }
 
     @Override
@@ -84,7 +88,7 @@ public class BinarySearchTree<T extends Number> implements AbstractBinarySearchT
     }
 
     private boolean searching(TreeNode<T> current, T value){
-        if(isEmpty(current)) {
+        if(existsNode(current)) {
             return false;
         }
         if(value.doubleValue() == current.getValue().doubleValue()) {
@@ -95,11 +99,14 @@ public class BinarySearchTree<T extends Number> implements AbstractBinarySearchT
                 : searching(current.getRightChild(), value);
     }
 
-    @Override
-    public boolean isEmpty(TreeNode<T> value) {
+    private boolean existsNode(TreeNode<T> value) {
         return value == null;
     }
 
+    @Override
+    public boolean isEmpty(){
+        return root == null;
+    }
     @Override
     public String toString(@NotNull Traversal traversal) {
         switch (traversal) {
@@ -117,7 +124,7 @@ public class BinarySearchTree<T extends Number> implements AbstractBinarySearchT
     }
 
     private String traverseInOrder(TreeNode<T> node, String out) {
-        if (!isEmpty(node)) {
+        if (!existsNode(node)) {
             out = traverseInOrder(node.getLeftChild(), out);
             out = out + " " + node.getValue().doubleValue();
             out = traverseInOrder(node.getRightChild(), out);
@@ -126,7 +133,7 @@ public class BinarySearchTree<T extends Number> implements AbstractBinarySearchT
     }
 
     private String traversePreOrder(TreeNode<T> node, String out) {
-        if (!isEmpty(node)) {
+        if (!existsNode(node)) {
             out = out + " " + node.getValue().doubleValue();
             out = traversePreOrder(node.getLeftChild(), out);
             out = traversePreOrder(node.getRightChild(), out);
@@ -135,7 +142,7 @@ public class BinarySearchTree<T extends Number> implements AbstractBinarySearchT
     }
 
     private String traversePostOrder(TreeNode<T> node, String out) {
-        if (!isEmpty(node)) {
+        if (!existsNode(node)) {
             out = traversePostOrder(node.getLeftChild(), out);
             out = traversePostOrder(node.getRightChild(), out);
             out = out + " " + node.getValue().doubleValue();
