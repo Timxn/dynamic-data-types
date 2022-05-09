@@ -4,11 +4,13 @@ public class TreeNode<T extends Number> {
     private T value;
     private TreeNode<T> leftChild;
     private TreeNode<T> rightChild;
+    private int height;
 
     public TreeNode(T value){
         this.value = value;
         this.leftChild = null;
         this.rightChild = null;
+        this.height = 1;
     }
 
     public T getValue(){
