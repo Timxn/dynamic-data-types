@@ -4,7 +4,7 @@ import inc.boes.praktikum.interfaces.AbstractDoublyLinkedList;
 
 import java.util.ArrayList;
 
-public class DoublyLinkedList<T extends Comparable> implements AbstractDoublyLinkedList<T> {
+public class DoublyLinkedList<T extends Comparable> implements AbstractDoublyLinkedList<T>, Iterable<T> {
     private DoublyLinkedListNode root;
 
     public DoublyLinkedList(T pData) {
@@ -159,6 +159,11 @@ public class DoublyLinkedList<T extends Comparable> implements AbstractDoublyLin
             resultsOut[i] = results.get(i);
         }
         return resultsOut;
+    }
+
+    @Override
+    public DoublyLinkedListIterator<T> iterator() {
+        return new DoublyLinkedListIterator<>(root);
     }
 
     /**

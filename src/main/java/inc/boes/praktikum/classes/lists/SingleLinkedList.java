@@ -2,12 +2,20 @@ package inc.boes.praktikum.classes.lists;
 
 import inc.boes.praktikum.interfaces.AbstractSinglyLinkedList;
 
-public class SingleLinkedList<T extends Comparable> implements AbstractSinglyLinkedList<T> {
-    private SingleLinkedListNode root;
+import java.util.Comparator;
+import java.util.Iterator;
+import java.util.NoSuchElementException;
+
+public class SingleLinkedList<T> implements AbstractSinglyLinkedList<T>, Iterable<T> {
+    private SingleLinkedListNode<T> root;
+    private int size = 0;
 
     public SingleLinkedList(T data) {
         this.root = new SingleLinkedListNode<>(data);
+        this.size = 1;
     }
+
+    public SingleLinkedList() {};
 
     /**
      * This function adds the data given at the end of the list.
@@ -15,6 +23,7 @@ public class SingleLinkedList<T extends Comparable> implements AbstractSinglyLin
      */
     @Override
     public void add(T pData) {
+        size++;
         SingleLinkedListNode current = root;
         while (current.getNext() != null) {
             current = current.getNext();
@@ -46,11 +55,21 @@ public class SingleLinkedList<T extends Comparable> implements AbstractSinglyLin
      */
     @Override
     public void removeLast() {
-        SingleLinkedListNode current = root;
-        while (current.getNext().getNext() != null) {
-            current = current.getNext();
+        if (root.equals(null)) {
+            throw new NoSuchElementException();
         }
-        current.setNext(null);
+        SingleLinkedListNode current = root;
+        if (root.getNext().equals(null)) {
+            root = null;
+            size--;
+            return;
+        } else {
+            while (current.getNext().getNext() != null) {
+                current = current.getNext();
+            }
+            current.setNext(null);
+            size--;
+        }
     }
 
     /**
@@ -60,15 +79,16 @@ public class SingleLinkedList<T extends Comparable> implements AbstractSinglyLin
     @Override
     public void removeatPointer(int pointer) {
         SingleLinkedListNode current = root;
-        while (index > 1) {
+        while (pointer > 1) {
             current = current.getNext();
-            index--;
+            pointer--;
         }
         if (current.getNext() != null) {
-            current.setNext(current.getNext.getNext);
+            current.setNext(current.getNext().getNext());
         } else {
             current.setNext(null);
         }
+        size--;
     }
 
     /**
@@ -78,14 +98,15 @@ public class SingleLinkedList<T extends Comparable> implements AbstractSinglyLin
     @Override
     public void removeNode(T Node) {
         SingleLinkedListNode current = root;
-        while (!current.getNext().getData().equal(Node)) {
+        while (!current.getNext().getData().equals(Node)) {
             current = current.getNext();
         }
         if (current.getNext() != null) {
-            current.setNext(current.getNext.getNext);
+            current.setNext(current.getNext().getNext());
         } else {
             current.setNext(null);
         }
+        size--;
     }
 
     /**
@@ -94,8 +115,8 @@ public class SingleLinkedList<T extends Comparable> implements AbstractSinglyLin
      */
     @Override
     public void removeNodes(T Node) {
-        while (root.findPointerof(Node)) {
-            root.removeatPointer(root.findPointerof(Node));
+        while (this.findPointerof(Node) != -1) {
+            this.removeatPointer(this.findPointerof(Node));
         }
     }
 
@@ -107,11 +128,11 @@ public class SingleLinkedList<T extends Comparable> implements AbstractSinglyLin
     @Override
     public T getNode(int pointer) {
         SingleLinkedListNode current = root;
-        while (index != 0) {
+        while (pointer != 0) {
             current = current.getNext();
-            index--;
+            pointer--;
         }
-        return current.getData();
+        return (T) current.getData();
     }
 
     /**
@@ -124,13 +145,17 @@ public class SingleLinkedList<T extends Comparable> implements AbstractSinglyLin
         SingleLinkedListNode current = root;
         int position = 0;
         while (current.getNext() != null) {
-            if (current.getData() == pData) {
+            if (current.getData() == Node) {
                 return position;
             }
             current = current.getNext();
             position++;
         }
         return -1;
+    }
+
+    public int getSize() {
+        return size;
     }
 
     /**
@@ -141,21 +166,21 @@ public class SingleLinkedList<T extends Comparable> implements AbstractSinglyLin
     @Override
     public int[] findPointersof(T Node) {
         SingleLinkedListNode current = root;
-        ArrayList<Integer> results = new ArrayList<>();
+        SingleLinkedList<Integer> results = new SingleLinkedList<>();
         int position = 0;
         while (current.getNext() != null) {
-            if (current.getData().equals(pData)) {
+            if (current.getData().equals(Node)) {
                 results.add(position);
             }
             current = current.getNext();
             position++;
         }
-        if (current.getData().equals(pData)) {
+        if (current.getData().equals(Node)) {
             results.add(position);
         }
-        int[] resultsOut = new int[results.size()];
-        for (int i = 0; i < results.size(); i++) {
-            resultsOut[i] = results.get(i);
+        int[] resultsOut = new int[results.getSize()];
+        for (int i = 0; i < results.getSize(); i++) {
+            resultsOut[i] = results.getNode(i);
         }
         return resultsOut;
     }
@@ -177,5 +202,15 @@ public class SingleLinkedList<T extends Comparable> implements AbstractSinglyLin
         }
         out = out + current.getData();
         return out;
+    }
+    /**
+     * For the Iterator
+     *
+     *
+     *
+     */
+    @Override
+    public Iterator<T> iterator(){
+        return new SinglyLinkedListsIterator(root);
     }
 }

@@ -1,9 +1,17 @@
 package inc.boes.praktikum.classes.lists;
 
+import java.util.Comparator;
 import java.util.Iterator;
+import java.util.NoSuchElementException;
 
 public class SinglyLinkedListsIterator <T> implements Iterator <T> {
-    Node<T> current = null;
+    SingleLinkedListNode<T> current = null;
+    SingleLinkedListNode<T> head = null;
+
+    public SinglyLinkedListsIterator(SingleLinkedListNode<T> current) {
+        this.current = current;
+    }
+
 
     @Override
     public boolean hasNext(){
@@ -22,14 +30,14 @@ public class SinglyLinkedListsIterator <T> implements Iterator <T> {
     public T next(){
         if ( current == null && head != null){
             current = head;
-            return head.getElement();
+            return head.getData();
         }
         else if (current != null){
 
             current = current.getNext();
-            return current.getElement();
+            return current.getData();
         }
-        throw new nosuchElementException();
+        throw new NoSuchElementException();
     }
 
     @Override
