@@ -1,5 +1,6 @@
-package inc.boes.praktikum.classes.trees;
+package inc.boes.praktikum.tests;
 
+import inc.boes.praktikum.classes.trees.BinarySearchTree;
 import inc.boes.praktikum.interfaces.AbstractBinarySearchTree;
 import org.junit.jupiter.api.Test;
 
@@ -9,6 +10,9 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class BinarySearchTreeTest {
 
+    /**
+     * checks whether insertion of multiple values works
+     */
     @Test
     void insert() {
         BinarySearchTree<Integer> bst = new BinarySearchTree<>();
@@ -22,12 +26,18 @@ class BinarySearchTreeTest {
         assertEquals(1, bst.getRoot().getLeftChild().getLeftChild().getValue().intValue());
     }
 
+    /**
+     * inserts null value
+     */
     @Test
     void insertNull(){
         BinarySearchTree<Integer> bst = new BinarySearchTree<>();
         assertThrows(NullPointerException.class, () -> bst.insert(null));
     }
 
+    /**
+     * checks if deletion of a node which has a left and a right child works
+     */
     @Test
     void delete2child() {
         BinarySearchTree<Integer> bst = new BinarySearchTree<>();
@@ -39,6 +49,9 @@ class BinarySearchTreeTest {
         assertEquals(2, bst.getRoot().getLeftChild().getValue().intValue());
     }
 
+    /**
+     * checks if deletion of a node which has only one child works
+     */
     @Test
     void delete1child() {
         BinarySearchTree<Integer> bst = new BinarySearchTree<>();
@@ -48,6 +61,9 @@ class BinarySearchTreeTest {
         assertEquals(3, bst.getRoot().getValue().intValue());
     }
 
+    /**
+     * checks if deletion of a node without children works
+     */
     @Test
     void delete0child() {
         BinarySearchTree<Integer> bst = new BinarySearchTree<>();
@@ -59,6 +75,9 @@ class BinarySearchTreeTest {
         assertEquals(2, bst.getRoot().getLeftChild().getValue().intValue());
     }
 
+    /**
+     * deletes null from the tree
+     */
     @Test
     void deleteNull(){
         BinarySearchTree<Integer> bst = new BinarySearchTree<>();
@@ -66,6 +85,9 @@ class BinarySearchTreeTest {
         assertThrows(NullPointerException.class, () -> bst.delete(null));
     }
 
+    /**
+     * checks whether searching an element works
+     */
     @Test
     void search() {
         BinarySearchTree<Integer> bst = new BinarySearchTree<>();
@@ -74,6 +96,9 @@ class BinarySearchTreeTest {
         assertFalse(bst.search(2));
     }
 
+    /**
+     * searches null
+     */
     @Test
     void searchNull() {
         BinarySearchTree<Integer> bst = new BinarySearchTree<>();
@@ -81,6 +106,9 @@ class BinarySearchTreeTest {
         assertThrows(NullPointerException.class, () -> bst.search(null));
     }
 
+    /**
+     * checks if the isEmpty method works
+     */
     @Test
     void isEmpty() {
         BinarySearchTree<Integer> bst = new BinarySearchTree<>();
@@ -89,6 +117,9 @@ class BinarySearchTreeTest {
         assertFalse(bst.isEmpty());
     }
 
+    /**
+     * checks if toString with traversal inorder works
+     */
     @Test
     void testToStringInOrder() {
         BinarySearchTree<Integer> bst = new BinarySearchTree<>();
@@ -98,6 +129,9 @@ class BinarySearchTreeTest {
         assertEquals(" 1.0 2.0 3.0", bst.toString(AbstractBinarySearchTree.Traversal.InOrder));
     }
 
+    /**
+     * checks if toString with traversal preorder works
+     */
     @Test
     void testToStringPreOrder() {
         BinarySearchTree<Integer> bst = new BinarySearchTree<>();
@@ -107,6 +141,9 @@ class BinarySearchTreeTest {
         assertEquals(" 2.0 1.0 3.0", bst.toString(AbstractBinarySearchTree.Traversal.PreOrder));
     }
 
+    /**
+     * checks if toString with traversal postorder works
+     */
     @Test
     void testToStringPostOrder() {
         BinarySearchTree<Integer> bst = new BinarySearchTree<>();
@@ -116,6 +153,9 @@ class BinarySearchTreeTest {
         assertEquals(" 1.0 3.0 2.0", bst.toString(AbstractBinarySearchTree.Traversal.PostOrder));
     }
 
+    /**
+     * checks if every function in the iterator works probably
+     */
     @Test
     void iterator() {
         BinarySearchTree<Integer> bst = new BinarySearchTree<>();
