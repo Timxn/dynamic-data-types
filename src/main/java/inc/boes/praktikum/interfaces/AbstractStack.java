@@ -7,7 +7,8 @@ public interface AbstractStack<T> {
     public T pop();
     public T top();
 
-    public boolean hasNext();
-    public T next();
-    public void remove();   // UnsopportedOperationException and IllegalStateException could be thrown
+    public boolean isEmpty();
+//    public boolean hasNext();
+//    public T next();
+//    public void remove();   // UnsopportedOperationException and IllegalStateException could be thrown
 }

@@ -21,6 +21,8 @@ public class Stack_Node<T> {
         this.next = next;
     }
 
+
+
     @Override
     public String toString() {
         return this.content.toString();

@@ -3,8 +3,10 @@ package inc.boes.praktikum.classes.stack;
 import inc.boes.praktikum.interfaces.AbstractStack;
 
 import java.util.EmptyStackException;
+import java.util.Iterator;
+import java.util.NoSuchElementException;
 
-public class Stack<T> implements AbstractStack<T> {
+public class Stack<T> implements AbstractStack<T>, Iterable<T> {
     private int size;
     private Stack_Node<T> root;
 
@@ -40,10 +42,10 @@ public class Stack<T> implements AbstractStack<T> {
         size++;
     }
 
-
     /**
      * remove last inserted element and return it
      * @return null if stack is empty, else generic data type stored in the root node
+     * @throws EmptyStackException when stack is empty
      */
     @Override
     public T pop() {
@@ -57,72 +59,30 @@ public class Stack<T> implements AbstractStack<T> {
             size--;
             return temp;
         } else {
-            return null;
+            throw new EmptyStackException();
         }
     }
 
-
     /**
      * return last inserted element
-     * @return null if stack is empty, else generic data type stored in the root node
+     * @return else generic data type stored in the root node
+     * @throws EmptyStackException when stack is empty
      */
     @Override
     public T top() {
         if (root != null) {
             return (T) root.getContent();
         } else {
-            return null;
-        }
-    }
-
-
-    /**
-     *
-     * @return true if the stack has a next value
-     */
-    @Override
-    public boolean hasNext() {
-        if (root == null) {
             throw new EmptyStackException();
         }
-        if (root.getNext() == null) {
-            return false;
-        }
-        return true;
     }
 
-
-    /**
-     * removes first element of stack and sets the second element as the root
-     * @return returns current values
-     */
     @Override
-    public T next() {
-        if (root == null) {
-            throw new EmptyStackException();
-        } else {
-            root = root.getNext();
-            size--;
-            if (root == null) {
-                return null;
-            } else {
-                return root.getContent();
-            }
-        }
+    public boolean isEmpty() {
+        if (root == null) return true;
+        return false;
     }
 
-
-    /**
-     * removes element
-     */
-    @Override
-    public void remove() {
-        if (root == null) {
-            throw new EmptyStackException();
-        } else {
-            this.next();
-        }
-    }
 
     /**
      * toString() function for representation of Stack
@@ -146,5 +106,119 @@ public class Stack<T> implements AbstractStack<T> {
         }
         output = output + "[" + counter + "] contains " + tempNode.getContent();
         return output;
+    }
+
+    public void deleteAtPosition(int position) {
+        Stack_Node<T> temp = root;
+        if (root == null) {
+            throw new EmptyStackException();
+        }
+        if (position == 0) {
+            root = temp.getNext();
+        } else {
+            for (int i = 0; i < position-1; i++) {
+                temp = temp.getNext();
+            }
+            temp.setNext(temp.getNext().getNext());
+        }
+    }
+
+    public int getSize() {
+        return size;
+    }
+
+    /**
+     * Returns an iterator over elements of type {@code T}.
+     *
+     * @return an Iterator.
+     */
+    @Override
+    public StackIterator<T> iterator() {
+        return new StackIterator<>(root, this);
+    }
+
+    public class StackIterator<T> implements Iterator<T> {
+        private Stack<T> root;
+        private Stack_Node<T> current;
+        private int position = 0;
+        private boolean hasMovedSinceLastDelete = true;
+
+        public StackIterator(Stack_Node<T> current, Stack<T> pStack) {
+            this.current = current;
+            this.root = pStack;
+        }
+
+        /**
+         * Returns {@code true} if the iteration has more elements.
+         * (In other words, returns {@code true} if {@link #next} would
+         * return an element rather than throwing an exception.)
+         *
+         * @return {@code true} if the iteration has more elements
+         */
+        @Override
+        public boolean hasNext() {
+            if (current == null) {
+                throw new EmptyStackException();
+            }
+            if (current.getNext() == null) {
+                return false;
+            }
+            return true;
+        }
+
+        /**
+         * Returns the next element in the iteration.
+         *
+         * @return the next element in the iteration
+         * @throws NoSuchElementException if the iteration has no more elements
+         */
+        @Override
+        public T next() {
+            if (current == null) {
+                throw new NoSuchElementException();
+            } else {
+                position++;
+                hasMovedSinceLastDelete = true;
+                current = current.getNext();
+                if (current == null) {
+                    return null;
+                } else {
+                    return current.getContent();
+                }
+            }
+        }
+
+        /**
+         * Removes from the underlying collection the last element returned
+         * by this iterator (optional operation).  This method can be called
+         * only once per call to {@link #next}.
+         * <p>
+         * The behavior of an iterator is unspecified if the underlying collection
+         * is modified while the iteration is in progress in any way other than by
+         * calling this method, unless an overriding class has specified a
+         * concurrent modification policy.
+         * <p>
+         * The behavior of an iterator is unspecified if this method is called
+         * after a call to the {@link #forEachRemaining forEachRemaining} method.
+         *
+         * @throws UnsupportedOperationException if the {@code remove}
+         *                                       operation is not supported by this iterator
+         * @throws IllegalStateException         if the {@code next} method has not
+         *                                       yet been called, or the {@code remove} method has already
+         *                                       been called after the last call to the {@code next}
+         *                                       method
+         * @implSpec The default implementation throws an instance of
+         * {@link UnsupportedOperationException} and performs no other action.
+         */
+        @Override
+        public void remove() {
+            if (hasMovedSinceLastDelete) {
+                root.deleteAtPosition(position);
+                hasMovedSinceLastDelete = false;
+                position--;
+            } else {
+                throw new IllegalStateException();
+            }
+        }
     }
 }
