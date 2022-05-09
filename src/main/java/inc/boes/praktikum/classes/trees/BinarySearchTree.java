@@ -15,6 +15,9 @@ public class BinarySearchTree<T extends Number> implements AbstractBinarySearchT
 
     @Override
     public void insert(T value) {
+        if (value == null) {
+            throw new NullPointerException();
+        }
         root = insertion(root, value);
     }
 
@@ -37,6 +40,9 @@ public class BinarySearchTree<T extends Number> implements AbstractBinarySearchT
 
     @Override
     public void delete(T value) {
+        if (value == null) {
+            throw new NullPointerException();
+        }
         root = deletion(root, value);
     }
 
@@ -71,6 +77,9 @@ public class BinarySearchTree<T extends Number> implements AbstractBinarySearchT
 
     @Override
     public boolean search(T value) {
+        if (value == null) {
+            throw new NullPointerException();
+        }
         return searching(root, value);
     }
 
@@ -104,7 +113,7 @@ public class BinarySearchTree<T extends Number> implements AbstractBinarySearchT
                 return traversePostOrder(root, "");
             }
         }
-        return null; //if wrong traversal
+        return "How did we get here?"; //Unreachable
     }
 
     private String traverseInOrder(TreeNode<T> node, String out) {
