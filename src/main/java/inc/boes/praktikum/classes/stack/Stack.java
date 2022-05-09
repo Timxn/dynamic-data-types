@@ -42,7 +42,6 @@ public class Stack<T> implements AbstractStack<T>, Iterable<T> {
         size++;
     }
 
-
     /**
      * remove last inserted element and return it
      * @return null if stack is empty, else generic data type stored in the root node
@@ -63,7 +62,6 @@ public class Stack<T> implements AbstractStack<T>, Iterable<T> {
             throw new EmptyStackException();
         }
     }
-
 
     /**
      * return last inserted element
@@ -123,6 +121,10 @@ public class Stack<T> implements AbstractStack<T>, Iterable<T> {
             }
             temp.setNext(temp.getNext().getNext());
         }
+    }
+
+    public int getSize() {
+        return size;
     }
 
     /**
