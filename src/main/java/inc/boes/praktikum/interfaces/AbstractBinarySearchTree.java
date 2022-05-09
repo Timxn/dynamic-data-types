@@ -8,6 +8,10 @@ public interface AbstractBinarySearchTree<T extends Number> {
     boolean search(T value);
     boolean isEmpty();
     String toString(Traversal traversal);
+
+    /**
+     * All possibilities for the traversal
+     */
     enum Traversal{
         PreOrder,
         InOrder,
