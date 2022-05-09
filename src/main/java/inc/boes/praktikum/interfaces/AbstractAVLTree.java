@@ -1,5 +1,7 @@
 package inc.boes.praktikum.interfaces;
 
-public interface AbstractAVLTree<T extends Number> extends AbstractBinarySearchTree {
+import inc.boes.praktikum.classes.trees.TreeNode;
 
+public interface AbstractAVLTree<T extends Number> extends AbstractBinarySearchTree<T> {
+    //no new methods
 }
