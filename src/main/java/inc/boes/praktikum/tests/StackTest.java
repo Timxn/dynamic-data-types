@@ -1,5 +1,6 @@
-package inc.boes.praktikum.classes.stack;
+package inc.boes.praktikum.tests;
 
+import inc.boes.praktikum.classes.stack.Stack;
 import org.junit.jupiter.api.Test;
 
 import java.util.EmptyStackException;
