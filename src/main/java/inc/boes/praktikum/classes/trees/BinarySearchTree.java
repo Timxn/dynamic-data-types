@@ -1,5 +1,4 @@
-package inc.boes.praktikum.classes;
-import com.sun.source.tree.BreakTree;
+package inc.boes.praktikum.classes.trees;
 import inc.boes.praktikum.interfaces.AbstractBinarySearchTree;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -19,6 +18,12 @@ public class BinarySearchTree<T extends Number> implements AbstractBinarySearchT
         root = insertion(root, value);
     }
 
+    /**
+     * was die funktion macht
+     * @param current
+     * @param value
+     * @return
+     */
     private @NotNull TreeNode<T> insertion(TreeNode<T> current, T value) {
         if(isEmpty(current)) {
             return new TreeNode<>(value);

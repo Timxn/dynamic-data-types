@@ -1,6 +1,6 @@
 package inc.boes.praktikum.interfaces;
 
-import inc.boes.praktikum.classes.TreeNode;
+import inc.boes.praktikum.classes.trees.TreeNode;
 
 public interface AbstractBinarySearchTree<T extends Number> {
     void insert(T value);

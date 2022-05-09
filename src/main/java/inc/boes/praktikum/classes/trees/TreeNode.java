@@ -1,4 +1,4 @@
-package inc.boes.praktikum.classes;
+package inc.boes.praktikum.classes.trees;
 
 public class TreeNode<T extends Number> {
     private T value;
