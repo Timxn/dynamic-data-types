@@ -35,9 +35,13 @@ public class SingleLinkedList<T> implements AbstractSinglyLinkedList<T>, Iterabl
      * This function places the data given after the given location inside the list. It does so by creating a new node and pushing existing nodes one to the back.
      * @param Node what data to be inserted
      * @param index where to insert it (if it shall be placed at the second place ([0,1,2,...] so index 1) in this case)
+     * @throws IndexOutOfBoundsException if Pointer points to non-existing Element
      */
     @Override
     public void insertafter(T Node, int index) {
+        if (index > size){
+            throw new IndexOutOfBoundsException();
+        }
         SingleLinkedListNode current = root;
         while (index != 0) {
             current = current.getNext();
@@ -47,6 +51,7 @@ public class SingleLinkedList<T> implements AbstractSinglyLinkedList<T>, Iterabl
         if (current.getNext() != null) {
             toBeAdded.setNext(current.getNext());
         }
+
         current.setNext(toBeAdded);
     }
 
@@ -75,9 +80,17 @@ public class SingleLinkedList<T> implements AbstractSinglyLinkedList<T>, Iterabl
     /**
      * This function removes a Node from the given index location
      * @param pointer index specifies the location inside the list
+     * @throws NoSuchElementException if List is empty
+     * @throws IndexOutOfBoundsException if Pointer points to non-existing Element
      */
     @Override
     public void removeatPointer(int pointer) {
+        if (root.equals(null)){
+            throw new NoSuchElementException();
+        }
+        if (pointer > size){
+            throw new IndexOutOfBoundsException();
+        }
         SingleLinkedListNode current = root;
         while (pointer > 1) {
             current = current.getNext();
@@ -93,10 +106,15 @@ public class SingleLinkedList<T> implements AbstractSinglyLinkedList<T>, Iterabl
 
     /**
      * This function removes the first node containing the given Data
-     * @param Node pData contains the generic Datatype whose first occurrence shall be removed
+     * @param Node pData contains the generic Datatype whose first occurrenceshall be removed
+     * @throws NoSuchElementException when List is empty
      */
+
     @Override
     public void removeNode(T Node) {
+        if (root.equals(null)){
+            throw new NoSuchElementException();
+        }
         SingleLinkedListNode current = root;
         while (!current.getNext().getData().equals(Node)) {
             current = current.getNext();
@@ -112,9 +130,13 @@ public class SingleLinkedList<T> implements AbstractSinglyLinkedList<T>, Iterabl
     /**
      * This function removes all occurrences of the given Data
      * @param Node pData contains the generic Datatype whose occurrences shall be removed
+     * @throws NoSuchElementException when List is empty
      */
     @Override
     public void removeNodes(T Node) {
+        if (root.equals(null)){
+            throw new NoSuchElementException();
+        }
         while (this.findPointerof(Node) != -1) {
             this.removeatPointer(this.findPointerof(Node));
         }
@@ -127,6 +149,9 @@ public class SingleLinkedList<T> implements AbstractSinglyLinkedList<T>, Iterabl
      */
     @Override
     public T getNode(int pointer) {
+        if (root.equals(null)){
+            throw new NoSuchElementException();
+        }
         SingleLinkedListNode current = root;
         while (pointer != 0) {
             current = current.getNext();
