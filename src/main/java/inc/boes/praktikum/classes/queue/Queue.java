@@ -13,6 +13,11 @@ public class Queue<T> implements AbstractQueue<T>,Iterable<T> {
     public Queue() {
     }
 
+
+    /**
+     * allows null
+     * @param data T generic type, or even null
+     */
     @Override
     public void enqueue(T data) {
         if (head == null) {
