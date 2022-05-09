@@ -36,4 +36,12 @@ public class TreeNode<T extends Number> {
     public void setRightChild(TreeNode<T> pRight){
         this.rightChild = pRight;
     }
+
+    public int getHeight() {
+        return height;
+    }
+
+    public void setHeight(int height) {
+        this.height = height;
+    }
 }
