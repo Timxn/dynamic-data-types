@@ -1,5 +1,6 @@
-package inc.boes.praktikum.classes.queue;
+package inc.boes.praktikum.tests;
 
+import inc.boes.praktikum.classes.queue.Queue;
 import org.junit.jupiter.api.Test;
 
 import java.util.Iterator;
