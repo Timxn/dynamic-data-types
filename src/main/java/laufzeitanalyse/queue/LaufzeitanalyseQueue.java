@@ -53,51 +53,45 @@ public class LaufzeitanalyseQueue {
 
     public static void main(String[] args) {
         int numberOfRuns = 100;
-        double[][] array = new double[numberOfRuns][];
-        for (int i = 0; i < numberOfRuns; i++) {
-            LaufzeitanalyseQueue analyse = new LaufzeitanalyseQueue();
-            double[] temp = (analyse.addElements(1000));
-            array[i] = temp;
-        }
+        int numberOfElements = 1000;
         System.out.println("ENQUEUE");
-        for (int i = 0; i < array.length/10; i++) {
-            System.out.println("Gen " + i + ": " + array[i][4]);
-        }
-        long ownDurchschnitt = 0;
-        long javaDurchschnitt = 0;
-        for (int i = 0; i < array.length; i++) {
-            ownDurchschnitt += array[i][0];
-            javaDurchschnitt += array[i][2];
-        }
-        ownDurchschnitt /= array.length;
-        javaDurchschnitt /= array.length;
+        for (int j = 10; j <= numberOfElements; j+=10) {
+            double[][] array = new double[numberOfRuns][];
+            for (int i = 0; i < numberOfRuns; i++) {
+                LaufzeitanalyseQueue analyse = new LaufzeitanalyseQueue();
+                double[] temp = (analyse.addElements(j));
+                array[i] = temp;
+            }
+            long ownDurchschnitt = 0;
+            long javaDurchschnitt = 0;
+            for (int i = 0; i < array.length; i++) {
+                ownDurchschnitt += array[i][0];
+                javaDurchschnitt += array[i][2];
+            }
+            ownDurchschnitt /= array.length;
+            javaDurchschnitt /= array.length;
 
-        System.out.println(ownDurchschnitt);
-        System.out.println(javaDurchschnitt);
-        System.out.println((double)ownDurchschnitt/javaDurchschnitt);
-
-        array = new double[numberOfRuns][];
-        for (int i = 0; i < numberOfRuns; i++) {
-            LaufzeitanalyseQueue analyse = new LaufzeitanalyseQueue();
-            double[] temp = (analyse.removeElements(1000));
-            array[i] = temp;
+            System.out.println("Eigenimplementierung: " + ownDurchschnitt + ", Javaimplementierung: " + javaDurchschnitt + ", mit " + j + " Elementen");
         }
         System.out.println("DEQUEUE");
-        for (int i = 0; i < array.length/10; i++) {
-            System.out.println("Gen " + i + ": " + array[i][4]);
-        }
-        ownDurchschnitt = 0;
-        javaDurchschnitt = 0;
-        for (int i = 0; i < array.length; i++) {
-            ownDurchschnitt += array[i][0];
-            javaDurchschnitt += array[i][2];
-        }
-        ownDurchschnitt /= array.length;
-        javaDurchschnitt /= array.length;
+        for (int j = 10; j <= numberOfElements; j+=10) {
+            double[][] array = new double[numberOfRuns][];
+            for (int i = 0; i < numberOfRuns; i++) {
+                LaufzeitanalyseQueue analyse = new LaufzeitanalyseQueue();
+                double[] temp = (analyse.removeElements(j));
+                array[i] = temp;
+            }
+            long ownDurchschnitt = 0;
+            long javaDurchschnitt = 0;
+            for (int i = 0; i < array.length; i++) {
+                ownDurchschnitt += array[i][0];
+                javaDurchschnitt += array[i][2];
+            }
+            ownDurchschnitt /= array.length;
+            javaDurchschnitt /= array.length;
 
-        System.out.println(ownDurchschnitt);
-        System.out.println(javaDurchschnitt);
-        System.out.println((double)ownDurchschnitt/javaDurchschnitt);
+            System.out.println("Eigenimplementierung: " + ownDurchschnitt + ", Javaimplementierung: " + javaDurchschnitt + ", mit " + j + " Elementen");
+        }
 
     }
 }
