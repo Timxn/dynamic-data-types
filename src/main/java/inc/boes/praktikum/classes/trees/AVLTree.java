@@ -1,4 +1,6 @@
 package inc.boes.praktikum.classes.trees;
 
-public class AVLTree {
+import inc.boes.praktikum.interfaces.AbstractAVLTree;
+
+public class AVLTree<T extends Number> {
 }
