@@ -1,9 +1,13 @@
 package inc.boes.praktikum.classes;
+import com.sun.source.tree.BreakTree;
 import inc.boes.praktikum.interfaces.AbstractBinarySearchTree;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-public class BinarySearchTree<T extends Number> implements AbstractBinarySearchTree<T>{
+import java.util.Iterator;
+import java.util.NoSuchElementException;
+
+public class BinarySearchTree<T extends Number> implements AbstractBinarySearchTree<T>, Iterable<T>{
 
     private TreeNode<T> root;
     public BinarySearchTree() {
@@ -125,4 +129,43 @@ public class BinarySearchTree<T extends Number> implements AbstractBinarySearchT
         return out;
     }
 
+    @NotNull
+    @Override
+    public TreeIterator<T> iterator() {
+        return new TreeIterator<T>(root);
+    }
+
+    public class TreeIterator<T extends Number> implements Iterator<T> {
+        BinarySearchTree<T> copy = new BinarySearchTree<T>();
+        public TreeIterator(TreeNode<T> root) {
+            copy.root = copyTree(root);
+        }
+
+        @Override
+        public boolean hasNext() {
+            return copy.root != null;
+        }
+
+        @Override
+        public T next() {
+            if (!hasNext()) throw new NoSuchElementException(); //exception if no follower
+
+            T returner = copy.root.getValue();
+            copy.delete(copy.root.getValue());
+            return returner;
+        }
+
+        private TreeNode<T> copyTree(TreeNode<T> root) {
+            if (root == null) {
+                return null;
+            }
+
+            TreeNode<T> root_copy = new TreeNode<T>(root.getValue());
+
+            root_copy.setLeftChild(copyTree(root.getLeftChild()));
+            root_copy.setRightChild(copyTree(root.getRightChild()));
+
+            return root_copy;
+        }
+    }
 }
