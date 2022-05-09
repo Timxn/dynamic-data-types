@@ -28,12 +28,14 @@ public class SinglyLinkedListsIterator <T> implements Iterator <T> {
 
     @Override
     public T next(){
-        if ( current == null && head != null){
-            current = head;
-            return head.getData();
+//        if ( current == null && head != null){
+//            current = head;
+//            return head.getData();
+//        }
+        if (current == null) {
+            throw new NoSuchElementException();
         }
-        else if (current != null){
-
+        if (current.getNext() != null){
             current = current.getNext();
             return current.getData();
         }

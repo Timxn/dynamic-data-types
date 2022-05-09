@@ -15,7 +15,9 @@ public class SingleLinkedList<T> implements AbstractSinglyLinkedList<T>, Iterabl
         this.size = 1;
     }
 
-    public SingleLinkedList() {};
+    public SingleLinkedList() {
+        this.root = null;
+    }
 
     /**
      * This function adds the data given at the end of the list.
@@ -23,6 +25,9 @@ public class SingleLinkedList<T> implements AbstractSinglyLinkedList<T>, Iterabl
      */
     @Override
     public void add(T pData) {
+        if (root == null) {
+            root = new SingleLinkedListNode<>(pData);
+        }
         size++;
         SingleLinkedListNode current = root;
         while (current.getNext() != null) {
@@ -115,16 +120,9 @@ public class SingleLinkedList<T> implements AbstractSinglyLinkedList<T>, Iterabl
         if (root.equals(null)){
             throw new NoSuchElementException();
         }
-        SingleLinkedListNode current = root;
-        while (!current.getNext().getData().equals(Node)) {
-            current = current.getNext();
+        if (this.findPointerof(Node) != -1) {
+            this.removeatPointer(this.findPointerof(Node));
         }
-        if (current.getNext() != null) {
-            current.setNext(current.getNext().getNext());
-        } else {
-            current.setNext(null);
-        }
-        size--;
     }
 
     /**
@@ -169,7 +167,7 @@ public class SingleLinkedList<T> implements AbstractSinglyLinkedList<T>, Iterabl
     public int findPointerof(T Node) {
         SingleLinkedListNode current = root;
         int position = 0;
-        while (current.getNext() != null) {
+        while (current != null) {
             if (current.getData() == Node) {
                 return position;
             }
@@ -227,6 +225,13 @@ public class SingleLinkedList<T> implements AbstractSinglyLinkedList<T>, Iterabl
         }
         out = out + current.getData();
         return out;
+    }
+
+    public boolean isEmpty() {
+        if (root == null) {
+            return true;
+        }
+        return false;
     }
     /**
      * For the Iterator
