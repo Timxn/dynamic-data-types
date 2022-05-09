@@ -1,4 +1,4 @@
-package laufzeitanalyse.queue;
+package laufzeitanalyse;
 
 import java.util.LinkedList;
 
