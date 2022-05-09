@@ -206,6 +206,12 @@ public class DoublyLinkedList<T extends Comparable> implements AbstractDoublyLin
         return new DoublyLinkedListIterator<>(root);
     }
 
+    public boolean isEmpty() {
+        if (root.equals(null)) {
+            return true;
+        }
+        return false;
+    }
     /**
      *
      * !!! Unoptimized, if used with larger Lists use Stringbuilder !!!
