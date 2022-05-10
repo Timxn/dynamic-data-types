@@ -2,6 +2,8 @@ package inc.boes.praktikum.classes.lists;
 
 import org.junit.jupiter.api.Test;
 
+import java.util.Iterator;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class DoublyLinkedListTest {
@@ -79,34 +81,55 @@ class DoublyLinkedListTest {
     @Test
     void getValue() {
         DoublyLinkedList<Integer> integerDoublyLinkedList = new DoublyLinkedList<>();
+        integerDoublyLinkedList.add((int)(Math.random()*Integer.MAX_VALUE));
+        int value = ((int)(Math.random()*Integer.MAX_VALUE));
+        integerDoublyLinkedList.add((int)(value));
+        integerDoublyLinkedList.add((int)(Math.random()*Integer.MAX_VALUE));
+        assertEquals(value, integerDoublyLinkedList.getValue(2));
     }
 
     @Test
     void getPositionOfValue() {
         DoublyLinkedList<Integer> integerDoublyLinkedList = new DoublyLinkedList<>();
+        integerDoublyLinkedList.add((int)(Math.random()*Integer.MAX_VALUE));
+        int value = ((int)(Math.random()*Integer.MAX_VALUE));
+        integerDoublyLinkedList.add((int)(value));
+        integerDoublyLinkedList.add((int)(Math.random()*Integer.MAX_VALUE));
+        assertEquals(2, integerDoublyLinkedList.getPositionOfValue(value));
     }
 
     @Test
     void getAllPositionsOfValue() {
         DoublyLinkedList<Integer> integerDoublyLinkedList = new DoublyLinkedList<>();
+        integerDoublyLinkedList.add((int)(Math.random()*Integer.MAX_VALUE));
+        integerDoublyLinkedList.add(5);
+        integerDoublyLinkedList.add((int)(Math.random()*Integer.MAX_VALUE));
+        integerDoublyLinkedList.add(5);
+        assertEquals();
+
     }
 
     @Test
     void getSize() {
-    }DoublyLinkedList<Integer> integerDoublyLinkedList = new DoublyLinkedList<>();
+        DoublyLinkedList<Integer> integerDoublyLinkedList = new DoublyLinkedList<>();
+        integerDoublyLinkedList.add((int)(Math.random()*Integer.MAX_VALUE));
+        integerDoublyLinkedList.add((int)(Math.random()*Integer.MAX_VALUE));
+        assertEquals(2, integerDoublyLinkedList.getSize());
 
+    }
     @Test
     void iterator() {
         DoublyLinkedList<Integer> integerDoublyLinkedList = new DoublyLinkedList<>();
+        integerDoublyLinkedList.add(5);
+        integerDoublyLinkedList.add(3);
+        integerDoublyLinkedList.add(8);
+        integerDoublyLinkedList.add(7);
+        Iterator<Integer> iterator = integerDoublyLinkedList.iterator();
+        assertTrue((iterator != null));
+        assertTrue(iterator.hasNext());
+        assertEquals(5, iterator.next());
+        assertEquals(3, iterator.next());
     }
 
-    @Test
-    void isEmpty() {
-        DoublyLinkedList<Integer> integerDoublyLinkedList = new DoublyLinkedList<>();
-    }
 
-    @Test
-    void testToString() {
-        DoublyLinkedList<Integer> integerDoublyLinkedList = new DoublyLinkedList<>();
-    }
 }
