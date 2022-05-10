@@ -11,3 +11,6 @@
 /build/classes/java/main/inc/boes/praktikum/classes/trees/BinarySearchTreeTest.class
 /build/classes/java/main/inc/boes/praktikum/classes/trees/TreeNode.class
 /build/classes/java/main/inc/boes/praktikum/tests/BinarySearchTreeTest.class
+/build/classes/java/main/inc/boes/praktikum/classes/trees/AVLTree$1.class
+/build/classes/java/main/inc/boes/praktikum/classes/trees/AVLTree$TreeIterator.class
+/build/classes/java/main/inc/boes/praktikum/tests/AVLTreeTest.class
