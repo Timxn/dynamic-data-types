@@ -1,6 +1,6 @@
 package inc.boes.praktikum.classes.trees;
 
-public class TreeNode<T extends Number> {
+public class TreeNode<T> {
     private T value;
     private TreeNode<T> leftChild;
     private TreeNode<T> rightChild;

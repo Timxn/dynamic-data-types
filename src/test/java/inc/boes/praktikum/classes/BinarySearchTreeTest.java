@@ -15,7 +15,7 @@ class BinarySearchTreeTest {
      */
     @Test
     void insert() {
-        BinarySearchTree<Integer> bst = new BinarySearchTree<>();
+        BinarySearchTree<Integer> bst = new BinarySearchTree<>(new IntegerComparator());
         bst.insert(3);
         bst.insert(2);
         bst.insert(4);
@@ -31,7 +31,7 @@ class BinarySearchTreeTest {
      */
     @Test
     void insertNull(){
-        BinarySearchTree<Integer> bst = new BinarySearchTree<>();
+        BinarySearchTree<Integer> bst = new BinarySearchTree<>(new IntegerComparator());
         assertThrows(NullPointerException.class, () -> bst.insert(null));
     }
 
@@ -40,7 +40,7 @@ class BinarySearchTreeTest {
      */
     @Test
     void delete2child() {
-        BinarySearchTree<Integer> bst = new BinarySearchTree<>();
+        BinarySearchTree<Integer> bst = new BinarySearchTree<>(new IntegerComparator());
         bst.insert(3);
         bst.insert(2);
         bst.insert(4);
@@ -54,7 +54,7 @@ class BinarySearchTreeTest {
      */
     @Test
     void delete1child() {
-        BinarySearchTree<Integer> bst = new BinarySearchTree<>();
+        BinarySearchTree<Integer> bst = new BinarySearchTree<>(new IntegerComparator());
         bst.insert(2);
         bst.insert(3);
         bst.delete(2);
@@ -66,7 +66,7 @@ class BinarySearchTreeTest {
      */
     @Test
     void delete0child() {
-        BinarySearchTree<Integer> bst = new BinarySearchTree<>();
+        BinarySearchTree<Integer> bst = new BinarySearchTree<>(new IntegerComparator());
         bst.insert(3);
         bst.insert(2);
         bst.insert(4);
@@ -80,7 +80,7 @@ class BinarySearchTreeTest {
      */
     @Test
     void deleteNull(){
-        BinarySearchTree<Integer> bst = new BinarySearchTree<>();
+        BinarySearchTree<Integer> bst = new BinarySearchTree<>(new IntegerComparator());
         bst.insert(1);
         assertThrows(NullPointerException.class, () -> bst.delete(null));
     }
@@ -90,7 +90,7 @@ class BinarySearchTreeTest {
      */
     @Test
     void search() {
-        BinarySearchTree<Integer> bst = new BinarySearchTree<>();
+        BinarySearchTree<Integer> bst = new BinarySearchTree<>(new IntegerComparator());
         bst.insert(1);
         assertTrue(bst.search(1));
         assertFalse(bst.search(2));
@@ -101,7 +101,7 @@ class BinarySearchTreeTest {
      */
     @Test
     void searchNull() {
-        BinarySearchTree<Integer> bst = new BinarySearchTree<>();
+        BinarySearchTree<Integer> bst = new BinarySearchTree<>(new IntegerComparator());
         bst.insert(1);
         assertThrows(NullPointerException.class, () -> bst.search(null));
     }
@@ -111,7 +111,7 @@ class BinarySearchTreeTest {
      */
     @Test
     void isEmpty() {
-        BinarySearchTree<Integer> bst = new BinarySearchTree<>();
+        BinarySearchTree<Integer> bst = new BinarySearchTree<>(new IntegerComparator());
         assertTrue(bst.isEmpty());
         bst.insert(1);
         assertFalse(bst.isEmpty());
@@ -122,11 +122,11 @@ class BinarySearchTreeTest {
      */
     @Test
     void testToStringInOrder() {
-        BinarySearchTree<Integer> bst = new BinarySearchTree<>();
+        BinarySearchTree<Integer> bst = new BinarySearchTree<>(new IntegerComparator());
         bst.insert(2);
         bst.insert(1);
         bst.insert(3);
-        assertEquals(" 1.0 2.0 3.0", bst.toString(AbstractBinarySearchTree.Traversal.InOrder));
+        assertEquals(" 1 2 3", bst.toString(AbstractBinarySearchTree.Traversal.InOrder));
     }
 
     /**
@@ -134,11 +134,11 @@ class BinarySearchTreeTest {
      */
     @Test
     void testToStringPreOrder() {
-        BinarySearchTree<Integer> bst = new BinarySearchTree<>();
+        BinarySearchTree<Integer> bst = new BinarySearchTree<>(new IntegerComparator());
         bst.insert(2);
         bst.insert(1);
         bst.insert(3);
-        assertEquals(" 2.0 1.0 3.0", bst.toString(AbstractBinarySearchTree.Traversal.PreOrder));
+        assertEquals(" 2 1 3", bst.toString(AbstractBinarySearchTree.Traversal.PreOrder));
     }
 
     /**
@@ -146,11 +146,11 @@ class BinarySearchTreeTest {
      */
     @Test
     void testToStringPostOrder() {
-        BinarySearchTree<Integer> bst = new BinarySearchTree<>();
+        BinarySearchTree<Integer> bst = new BinarySearchTree<>(new IntegerComparator());
         bst.insert(2);
         bst.insert(1);
         bst.insert(3);
-        assertEquals(" 1.0 3.0 2.0", bst.toString(AbstractBinarySearchTree.Traversal.PostOrder));
+        assertEquals(" 1 3 2", bst.toString(AbstractBinarySearchTree.Traversal.PostOrder));
     }
 
     /**
@@ -158,7 +158,7 @@ class BinarySearchTreeTest {
      */
     @Test
     void iterator() {
-        BinarySearchTree<Integer> bst = new BinarySearchTree<>();
+        BinarySearchTree<Integer> bst = new BinarySearchTree<>(new IntegerComparator());
         bst.insert(2);
         bst.insert(1);
         bst.insert(3);

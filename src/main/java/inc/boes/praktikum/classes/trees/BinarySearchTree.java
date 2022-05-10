@@ -3,21 +3,24 @@ import inc.boes.praktikum.interfaces.AbstractBinarySearchTree;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.Comparator;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
-public class BinarySearchTree<T extends Number> implements AbstractBinarySearchTree<T>, Iterable<T>{
+public class BinarySearchTree<T> implements AbstractBinarySearchTree<T>, Iterable<T>{
 
     /**
      * root node of the BinarySearchTree
      */
     private TreeNode<T> root;
+    private Comparator<T> comparator;
 
     /**
      * constructor of BinarySearchTree which sets the root to null
      */
-    public BinarySearchTree() {
+    public BinarySearchTree(Comparator<T> comparator) {
         this.root = null;
+        this.comparator = comparator;
     }
 
     /**
@@ -49,9 +52,9 @@ public class BinarySearchTree<T extends Number> implements AbstractBinarySearchT
     private @NotNull TreeNode<T> insertion(TreeNode<T> current, T value) {
         if(existsNode(current)) {
             return new TreeNode<>(value);
-        } else if(value.doubleValue() < current.getValue().doubleValue()){
+        } else if(comparator.compare(value, current.getValue()) < 0){
             current.setLeftChild(insertion(current.getLeftChild(), value));
-        } else if(value.doubleValue() > current.getValue().doubleValue()){
+        } else if(comparator.compare(value, current.getValue()) > 0){
             current.setRightChild(insertion(current.getRightChild(), value));
         }
         return current; //if element exists already nothing happens and the existing tree will be returned
@@ -79,7 +82,7 @@ public class BinarySearchTree<T extends Number> implements AbstractBinarySearchT
         if (existsNode(current)){
             return null;
         }
-        if (value.doubleValue() == current.getValue().doubleValue()) {
+        if (comparator.compare(value, current.getValue()) == 0) {
             if (existsNode(current.getLeftChild()) && existsNode(current.getRightChild())) {
                 return null;
             } else if (existsNode(current.getRightChild() )) {
@@ -93,7 +96,7 @@ public class BinarySearchTree<T extends Number> implements AbstractBinarySearchT
                 return current;
             }
         }
-        if (value.doubleValue() < current.getValue().doubleValue()) {
+        if (comparator.compare(value, current.getValue()) < 0) {
             current.setLeftChild(deletion(current.getLeftChild(), value));
         }
         current.setRightChild(deletion(current.getRightChild(), value));
@@ -132,12 +135,15 @@ public class BinarySearchTree<T extends Number> implements AbstractBinarySearchT
         if(existsNode(current)) {
             return false;
         }
-        if(value.doubleValue() == current.getValue().doubleValue()) {
+        if(comparator.compare(value, current.getValue()) == 0) {
             return true;
         }
-        return value.doubleValue() < current.getValue().doubleValue()
-                ? searching(current.getLeftChild(), value)
-                : searching(current.getRightChild(), value);
+
+        if (comparator.compare(value, current.getValue()) < 0) {
+            return searching(current.getLeftChild(), value);
+        } else {
+            return searching(current.getRightChild(), value);
+        }
     }
 
     /**
@@ -188,7 +194,7 @@ public class BinarySearchTree<T extends Number> implements AbstractBinarySearchT
     private String traverseInOrder(TreeNode<T> node, String out) {
         if (!existsNode(node)) {
             out = traverseInOrder(node.getLeftChild(), out);
-            out = out + " " + node.getValue().doubleValue();
+            out = out + " " + node.getValue();
             out = traverseInOrder(node.getRightChild(), out);
         }
         return out;
@@ -202,7 +208,7 @@ public class BinarySearchTree<T extends Number> implements AbstractBinarySearchT
      */
     private String traversePreOrder(TreeNode<T> node, String out) {
         if (!existsNode(node)) {
-            out = out + " " + node.getValue().doubleValue();
+            out = out + " " + node.getValue();
             out = traversePreOrder(node.getLeftChild(), out);
             out = traversePreOrder(node.getRightChild(), out);
         }
@@ -219,7 +225,7 @@ public class BinarySearchTree<T extends Number> implements AbstractBinarySearchT
         if (!existsNode(node)) {
             out = traversePostOrder(node.getLeftChild(), out);
             out = traversePostOrder(node.getRightChild(), out);
-            out = out + " " + node.getValue().doubleValue();
+            out = out + " " + node.getValue();
         }
         return out;
     }
@@ -234,8 +240,8 @@ public class BinarySearchTree<T extends Number> implements AbstractBinarySearchT
         return new TreeIterator<T>(root);
     }
 
-    public class TreeIterator<T extends Number> implements Iterator<T> {
-        BinarySearchTree<T> copy = new BinarySearchTree<T>();
+    public class TreeIterator<T> implements Iterator<T> {
+        BinarySearchTree<T> copy = new BinarySearchTree<T>((Comparator<T>) comparator);
 
         /**
          * creates an iterator with a deep copy of the original tree
