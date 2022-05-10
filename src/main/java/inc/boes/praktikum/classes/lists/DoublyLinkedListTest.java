@@ -128,8 +128,8 @@ class DoublyLinkedListTest {
         Iterator<Integer> iterator = integerDoublyLinkedList.iterator();
         assertTrue((iterator != null));
         assertTrue(iterator.hasNext());
-        assertEquals(5, iterator.next());
         assertEquals(3, iterator.next());
+        assertEquals(8, iterator.next());
     }
 
 
