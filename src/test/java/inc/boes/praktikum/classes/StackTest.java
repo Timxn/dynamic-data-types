@@ -1,4 +1,4 @@
-package inc.boes.praktikum.tests;
+package inc.boes.praktikum.classes;
 
 import inc.boes.praktikum.classes.stack.Stack;
 import org.junit.jupiter.api.Test;
