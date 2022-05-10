@@ -1,6 +1,8 @@
-package inc.boes.praktikum.classes.lists;
+package inc.boes.praktikum.classes;
 
 import static org.junit.jupiter.api.Assertions.*;
+
+import inc.boes.praktikum.classes.lists.SingleLinkedList;
 import org.junit.jupiter.api.* ;
 
 import java.util.Iterator;

@@ -1,5 +1,6 @@
-package inc.boes.praktikum.classes.lists;
+package inc.boes.praktikum.classes;
 
+import inc.boes.praktikum.classes.lists.DoublyLinkedList;
 import org.junit.jupiter.api.Test;
 
 import java.util.Iterator;
