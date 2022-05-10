@@ -14,7 +14,7 @@ class DoublyLinkedListTest {
     void add() {
         DoublyLinkedList<Integer> integerDoublyLinkedList = new DoublyLinkedList<>();
         assertTrue(integerDoublyLinkedList.isEmpty());
-        integerDoublyLinkedList.add(5);
+        integerDoublyLinkedList.add((int)(Math.random()*Integer.MAX_VALUE));
         assertFalse(integerDoublyLinkedList.isEmpty());
     }
 
@@ -85,17 +85,18 @@ class DoublyLinkedListTest {
         int value = ((int)(Math.random()*Integer.MAX_VALUE));
         integerDoublyLinkedList.add((int)(value));
         integerDoublyLinkedList.add((int)(Math.random()*Integer.MAX_VALUE));
+        System.out.println(integerDoublyLinkedList);
         assertEquals(value, integerDoublyLinkedList.getValue(2));
     }
 
     @Test
     void getPositionOfValue() {
         DoublyLinkedList<Integer> integerDoublyLinkedList = new DoublyLinkedList<>();
-        integerDoublyLinkedList.add((int)(Math.random()*Integer.MAX_VALUE));
-        int value = ((int)(Math.random()*Integer.MAX_VALUE));
-        integerDoublyLinkedList.add((int)(value));
-        integerDoublyLinkedList.add((int)(Math.random()*Integer.MAX_VALUE));
-        assertEquals(2, integerDoublyLinkedList.getPositionOfValue(value));
+        integerDoublyLinkedList.add(7);
+        int value = 8;
+        integerDoublyLinkedList.add(value);
+        integerDoublyLinkedList.add(9);
+        assertEquals(1, integerDoublyLinkedList.getPositionOfValue(value));
     }
 
     @Test
@@ -105,7 +106,7 @@ class DoublyLinkedListTest {
         integerDoublyLinkedList.add(5);
         integerDoublyLinkedList.add((int)(Math.random()*Integer.MAX_VALUE));
         integerDoublyLinkedList.add(5);
-        assertEquals();
+        //assertEquals();
 
     }
 

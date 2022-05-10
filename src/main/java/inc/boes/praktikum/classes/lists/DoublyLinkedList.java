@@ -126,7 +126,7 @@ public class DoublyLinkedList<T extends Comparable> implements AbstractDoublyLin
             throw new NoSuchElementException();
         }
         while (this.getPositionOfValue(pData) != -1) {
-            this.removeValue(pData);
+            this.removeNode(this.getPositionOfValue(pData));
         }
     }
 
@@ -162,7 +162,7 @@ public class DoublyLinkedList<T extends Comparable> implements AbstractDoublyLin
         }
         DoublyLinkedListNode current = root;
         int position = 0;
-        while (current.getNext() != null) {
+        while (current != null) {
             if (current.getData() == pData) {
                 return position;
             }
