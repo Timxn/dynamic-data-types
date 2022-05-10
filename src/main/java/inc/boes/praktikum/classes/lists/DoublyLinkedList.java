@@ -27,6 +27,7 @@ public class DoublyLinkedList<T extends Comparable> implements AbstractDoublyLin
         current.setNext(new DoublyLinkedListNode<>(pData, current));
     }
 
+
     /**
      * This function places the data given after the given location inside the list. It does so by creating a new node and pushing existing nodes one to the back.
      * @param pData what data to be inserted
@@ -80,17 +81,22 @@ public class DoublyLinkedList<T extends Comparable> implements AbstractDoublyLin
         if (root.equals(null)){
             throw new NoSuchElementException();
         }
+        if (index > size){
+            throw new IndexOutOfBoundsException();
+        }
         DoublyLinkedListNode current = root;
-        while (index != 0) {
+        while (index > 1) {
             current = current.getNext();
             index--;
         }
         if (current.getNext() != null) {
             current.getPrevious().setNext(current.getNext());
             current.getNext().setPrevious(current.getPrevious());
+        } else {
+            current.setNext(null);
+            current.setPrevious(current.getPrevious());
         }
-        current.setNext(null);
-        current.setPrevious(null);
+        size--;
     }
 
     /**
