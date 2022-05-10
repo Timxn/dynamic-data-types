@@ -38,6 +38,9 @@ public class TreeNode<T extends Number> {
     }
 
     public int getHeight() {
+        if (value == null) {
+            return 0;
+        }
         return height;
     }
 
