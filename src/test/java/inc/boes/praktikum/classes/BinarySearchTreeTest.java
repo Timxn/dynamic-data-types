@@ -1,4 +1,4 @@
-package inc.boes.praktikum.tests;
+package inc.boes.praktikum.classes;
 
 import inc.boes.praktikum.classes.trees.BinarySearchTree;
 import inc.boes.praktikum.interfaces.AbstractBinarySearchTree;
