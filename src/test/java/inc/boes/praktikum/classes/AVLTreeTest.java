@@ -1,7 +1,6 @@
 package inc.boes.praktikum.classes;
 
 import inc.boes.praktikum.classes.trees.AVLTree;
-import inc.boes.praktikum.classes.trees.BinarySearchTree;
 import inc.boes.praktikum.interfaces.AbstractBinarySearchTree;
 import org.junit.jupiter.api.Test;
 
@@ -16,7 +15,7 @@ class AVLTreeTest {
      */
     @Test
     void insert() {
-        AVLTree<Integer> avl = new AVLTree<>();
+        AVLTree<Integer> avl = new AVLTree<>(new IntegerComparator());
         avl.insert(1);
         assertEquals(1, avl.getRoot().getValue().intValue());
         avl.insert(2);
@@ -31,7 +30,7 @@ class AVLTreeTest {
      */
     @Test
     void insertNull(){
-        AVLTree<Integer> avl = new AVLTree<>();
+        AVLTree<Integer> avl = new AVLTree<>(new IntegerComparator());
         assertThrows(NullPointerException.class, () -> avl.insert(null));
     }
 
@@ -40,7 +39,7 @@ class AVLTreeTest {
      */
     @Test
     void delete2child() {
-        AVLTree<Integer> avl = new AVLTree<>();
+        AVLTree<Integer> avl = new AVLTree<>(new IntegerComparator());
         avl.insert(1);
         avl.insert(2);
         avl.insert(3);
@@ -54,7 +53,7 @@ class AVLTreeTest {
      */
     @Test
     void delete1child() {
-        AVLTree<Integer> avl = new AVLTree<>();
+        AVLTree<Integer> avl = new AVLTree<>(new IntegerComparator());
         avl.insert(2);
         avl.insert(3);
         avl.delete(2);
@@ -66,7 +65,7 @@ class AVLTreeTest {
      */
     @Test
     void delete0child() {
-        AVLTree<Integer> avl = new AVLTree<>();
+        AVLTree<Integer> avl = new AVLTree<>(new IntegerComparator());
         avl.insert(3);
         avl.insert(2);
         avl.insert(4);
@@ -80,7 +79,7 @@ class AVLTreeTest {
      */
     @Test
     void deleteNull(){
-        AVLTree<Integer> avl = new AVLTree<>();
+        AVLTree<Integer> avl = new AVLTree<>(new IntegerComparator());
         avl.insert(1);
         assertThrows(NullPointerException.class, () -> avl.delete(null));
     }
@@ -90,7 +89,7 @@ class AVLTreeTest {
      */
     @Test
     void search() {
-        AVLTree<Integer> avl = new AVLTree<>();
+        AVLTree<Integer> avl = new AVLTree<>(new IntegerComparator());
         avl.insert(1);
         avl.insert(2);
         avl.insert(3);
@@ -107,7 +106,7 @@ class AVLTreeTest {
      */
     @Test
     void searchNull() {
-        AVLTree<Integer> avl = new AVLTree<>();
+        AVLTree<Integer> avl = new AVLTree<>(new IntegerComparator());
         avl.insert(1);
         assertThrows(NullPointerException.class, () -> avl.search(null));
     }
@@ -117,7 +116,7 @@ class AVLTreeTest {
      */
     @Test
     void isEmpty() {
-        AVLTree<Integer> avl = new AVLTree<>();
+        AVLTree<Integer> avl = new AVLTree<>(new IntegerComparator());
         assertTrue(avl.isEmpty());
         avl.insert(1);
         assertFalse(avl.isEmpty());
@@ -128,14 +127,14 @@ class AVLTreeTest {
      */
     @Test
     void testToStringInOrder() {
-        AVLTree<Integer> avl = new AVLTree<>();
+        AVLTree<Integer> avl = new AVLTree<>(new IntegerComparator());
         avl.insert(2);
         avl.insert(1);
         avl.insert(4);
         avl.insert(5);
         avl.insert(3);
         avl.insert(6);
-        assertEquals(" 1.0 2.0 3.0 4.0 5.0 6.0", avl.toString(AbstractBinarySearchTree.Traversal.InOrder));
+        assertEquals(" 1 2 3 4 5 6", avl.toString(AbstractBinarySearchTree.Traversal.InOrder));
     }
 
     /**
@@ -143,11 +142,11 @@ class AVLTreeTest {
      */
     @Test
     void testToStringPreOrder() {
-        AVLTree<Integer> avl = new AVLTree<>();
+        AVLTree<Integer> avl = new AVLTree<>(new IntegerComparator());
         avl.insert(2);
         avl.insert(1);
         avl.insert(3);
-        assertEquals(" 2.0 1.0 3.0", avl.toString(AbstractBinarySearchTree.Traversal.PreOrder));
+        assertEquals(" 2 1 3", avl.toString(AbstractBinarySearchTree.Traversal.PreOrder));
     }
 
     /**
@@ -155,11 +154,11 @@ class AVLTreeTest {
      */
     @Test
     void testToStringPostOrder() {
-        AVLTree<Integer> avl = new AVLTree<>();
+        AVLTree<Integer> avl = new AVLTree<>(new IntegerComparator());
         avl.insert(2);
         avl.insert(1);
         avl.insert(3);
-        assertEquals(" 1.0 3.0 2.0", avl.toString(AbstractBinarySearchTree.Traversal.PostOrder));
+        assertEquals(" 1 3 2", avl.toString(AbstractBinarySearchTree.Traversal.PostOrder));
     }
 
     /**
@@ -167,7 +166,7 @@ class AVLTreeTest {
      */
     @Test
     void iterator() {
-        AVLTree<Integer> avl = new AVLTree<>();
+        AVLTree<Integer> avl = new AVLTree<>(new IntegerComparator());
         avl.insert(2);
         avl.insert(1);
         avl.insert(3);

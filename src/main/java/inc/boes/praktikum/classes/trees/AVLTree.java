@@ -3,21 +3,24 @@ package inc.boes.praktikum.classes.trees;
 import inc.boes.praktikum.interfaces.AbstractAVLTree;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.Comparator;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
-public class AVLTree<T extends Number> implements AbstractAVLTree<T>, Iterable<T>{
+public class AVLTree<T> implements AbstractAVLTree<T>, Iterable<T>{
 
     /**
      * root node of the AVLTree
      */
     private TreeNode<T> root;
+    private Comparator<T> comparator;
 
     /**
      * constructor of AVLTree which sets the root to null
      */
-    public AVLTree(){
+    public AVLTree(Comparator<T> comparator){
         root = null;
+        this.comparator = comparator;
     }
 
     /**
@@ -114,9 +117,9 @@ public class AVLTree<T extends Number> implements AbstractAVLTree<T>, Iterable<T
         /* 1. Perform the normal BST rotation */
         if (current == null) {
             return new TreeNode<>(value);
-        } else if(value.doubleValue() < current.getValue().doubleValue()){
+        } else if(comparator.compare(value, current.getValue()) < 0){
             current.setLeftChild(insertion(current.getLeftChild(), value));
-        } else if(value.doubleValue() > current.getValue().doubleValue()){
+        } else if(comparator.compare(value, current.getValue()) > 0){
             current.setRightChild(insertion(current.getRightChild(), value));
         }
 
@@ -156,9 +159,9 @@ public class AVLTree<T extends Number> implements AbstractAVLTree<T>, Iterable<T
         // If the value to be deleted is smaller than the root's value, then it lies in left subtree
         // If the value to be deleted is greater than the root's value, then it lies in right subtree
         // if value is same as root's value, then this is the node to be deleted
-        if (value.doubleValue() < current.getValue().doubleValue()) {
+        if (comparator.compare(value, current.getValue()) < 0) {
             current.setLeftChild(deletion(current.getLeftChild(), value));
-        } else if (value.doubleValue() > current.getValue().doubleValue()) {
+        } else if (comparator.compare(value, current.getValue()) > 0) {
             current.setRightChild(deletion(current.getRightChild(), value));
         } else {
             // node with only one child or no child
@@ -226,12 +229,15 @@ public class AVLTree<T extends Number> implements AbstractAVLTree<T>, Iterable<T
         if(current == null) {
             return false;
         }
-        if(value.doubleValue() == current.getValue().doubleValue()) {
+        if(comparator.compare(value, current.getValue()) == 0) {
             return true;
         }
-        return value.doubleValue() < current.getValue().doubleValue()
-                ? searching(current.getLeftChild(), value)
-                : searching(current.getRightChild(), value);
+
+        if (comparator.compare(value, current.getValue()) < 0) {
+            return searching(current.getLeftChild(), value);
+        } else {
+            return searching(current.getRightChild(), value);
+        }
     }
 
     /**
@@ -246,23 +252,23 @@ public class AVLTree<T extends Number> implements AbstractAVLTree<T>, Iterable<T
 
         // If this node becomes unbalanced, then are 4 cases
         //LeftLeft
-        if (balance > 1 && value.doubleValue() < current.getLeftChild().getValue().doubleValue()) {
+        if (balance > 1 && comparator.compare(value, current.getLeftChild().getValue()) < 0) {
             return rightRotate(current);
         }
 
         //RightRight
-        if (balance < -1 && value.doubleValue() > current.getRightChild().getValue().doubleValue()) {
+        if (balance < -1 && comparator.compare(value, current.getRightChild().getValue()) > 0) {
             return leftRotate(current);
         }
 
         //LeftRight
-        if (balance > 1 && value.doubleValue() > current.getLeftChild().getValue().doubleValue()) {
+        if (balance > 1 && comparator.compare(value, current.getLeftChild().getValue()) > 0) {
             current.setLeftChild(leftRotate(current.getLeftChild()));
             return rightRotate(current);
         }
 
         //RightLeft
-        if (balance < -1 && value.doubleValue() < current.getRightChild().getValue().doubleValue()) {
+        if (balance < -1 && comparator.compare(value, current.getRightChild().getValue()) < 0) {
             current.setRightChild(rightRotate(current.getRightChild()));
             return leftRotate(current);
         }
@@ -324,7 +330,7 @@ public class AVLTree<T extends Number> implements AbstractAVLTree<T>, Iterable<T
     private String traverseInOrder(TreeNode<T> node, String out) {
         if (node != null) {
             out = traverseInOrder(node.getLeftChild(), out);
-            out = out + " " + node.getValue().doubleValue();
+            out = out + " " + node.getValue();
             out = traverseInOrder(node.getRightChild(), out);
         }
         return out;
@@ -338,7 +344,7 @@ public class AVLTree<T extends Number> implements AbstractAVLTree<T>, Iterable<T
      */
     private String traversePreOrder(TreeNode<T> node, String out) {
         if (node != null) {
-            out = out + " " + node.getValue().doubleValue();
+            out = out + " " + node.getValue();
             out = traversePreOrder(node.getLeftChild(), out);
             out = traversePreOrder(node.getRightChild(), out);
         }
@@ -355,7 +361,7 @@ public class AVLTree<T extends Number> implements AbstractAVLTree<T>, Iterable<T
         if (node != null) {
             out = traversePostOrder(node.getLeftChild(), out);
             out = traversePostOrder(node.getRightChild(), out);
-            out = out + " " + node.getValue().doubleValue();
+            out = out + " " + node.getValue();
         }
         return out;
     }
@@ -370,8 +376,8 @@ public class AVLTree<T extends Number> implements AbstractAVLTree<T>, Iterable<T
         return new TreeIterator<T>(root);
     }
 
-    public class TreeIterator<T extends Number> implements Iterator<T> {
-        AVLTree<T> copy = new AVLTree<T>();
+    public class TreeIterator<T> implements Iterator<T> {
+        AVLTree<T> copy = new AVLTree<T>((Comparator<T>) comparator);
 
         /**
          * creates an iterator with a deep copy of the original tree
