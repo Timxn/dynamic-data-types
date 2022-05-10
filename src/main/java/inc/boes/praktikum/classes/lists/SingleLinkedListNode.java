@@ -1,6 +1,6 @@
 package inc.boes.praktikum.classes.lists;
 
-public class SingleLinkedListNode<T extends Comparable> {
+public class SingleLinkedListNode<T> {
     private T data;
     private SingleLinkedListNode next;
 
@@ -24,4 +24,6 @@ public class SingleLinkedListNode<T extends Comparable> {
     public void setNext(SingleLinkedListNode next) {
         this.next = next;
     }
+
+
 }

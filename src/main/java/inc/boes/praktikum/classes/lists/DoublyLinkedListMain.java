@@ -33,6 +33,7 @@ public class DoublyLinkedListMain {
 
         System.out.println(doubleLinkedList.toString());
 
+        //throws an IndexofB exception
         System.out.println("insert after every 23 a 42");
         int numberOf23s = doubleLinkedList.getAllPositionsOfValue(23).length;
         System.out.println(numberOf23s);
@@ -42,6 +43,7 @@ public class DoublyLinkedListMain {
         }
         System.out.println(doubleLinkedList.toString());
 
+        //throws an IndexofB exception
         System.out.println("The Value of the node at position 5 is " + doubleLinkedList.getValue(5));
     }
 }
